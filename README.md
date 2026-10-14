@@ -1,7 +1,7 @@
 # Website Pondok Pesantren Hurriyyatunnas Bakti Awo
 
 Website statis berbasis **Astro + Tailwind CSS**, dengan dashboard admin **Sveltia CMS** di `/admin`.
-Semua layanan yang dipakai gratis: GitHub (penyimpanan konten) dan Cloudflare Pages (hosting).
+Semua layanan yang dipakai gratis: GitHub (penyimpanan konten) dan Cloudflare Workers (hosting).
 
 ## Menjalankan di komputer
 
@@ -30,16 +30,21 @@ Teks di halaman **Profil** dan **Program** masih contoh, ditandai `[...]`. Edit 
 
 ## Deploy gratis
 
-### 1. Upload ke GitHub
-Buat repo baru di GitHub (misalnya `ponpes-hurriyyatunnas`), lalu push project ini.
+Website sudah online (mode preview) di https://ponpes-hurriyyatunnas.arul-21.workers.dev
 
-### 2. Hosting di Cloudflare Pages
-1. Masuk ke dash.cloudflare.com, buka **Workers & Pages**, pilih **Create**, lalu **Pages**, lalu **Connect to Git** dan pilih repo tadi.
-2. Isi pengaturan build:
+### 1. Repo GitHub
+Kode ada di `Pondok-Pesantren-Hurriyyatunnas/webiste`.
+
+### 2. Hosting di Cloudflare Workers
+Pengaturan deploy ada di `wrangler.jsonc`. Website disajikan sebagai file statis dari folder `dist`.
+
+1. Masuk ke dash.cloudflare.com, buka **Workers & Pages**, pilih **Create**, lalu **Import a repository**, dan pilih repo tadi.
+2. Isi pengaturan:
+   - Project name: `ponpes-hurriyyatunnas` (harus sama dengan `name` di `wrangler.jsonc`)
    - Build command: `npm run build`
-   - Output directory: `dist`
-   - Environment variable: `NODE_VERSION` = `22`
-3. Klik Deploy. Website akan online di `https://NAMA-PROJECT.pages.dev`.
+   - Deploy command: `npx wrangler deploy`
+   - Di **Advanced settings**, tambahkan Build variable `NODE_VERSION` = `22`
+3. Klik Deploy.
 
 Setiap kali ada perubahan di GitHub, termasuk dari dashboard admin, website otomatis ter-update dalam 1–2 menit.
 

@@ -8,8 +8,8 @@ backend:
   # Isi setelah memasang Sveltia CMS Authenticator di Cloudflare Workers (lihat README):
   # base_url: https://sveltia-cms-auth.NAMA-AKUN.workers.dev
 
-site_url: https://ponpes-hurriyyatunnas.pages.dev
-display_url: https://ponpes-hurriyyatunnas.pages.dev
+site_url: https://ponpes-hurriyyatunnas.arul-21.workers.dev
+display_url: https://ponpes-hurriyyatunnas.arul-21.workers.dev
 logo_url: /favicon.svg
 
 # Semua gambar yang diupload lewat dashboard disimpan di sini
