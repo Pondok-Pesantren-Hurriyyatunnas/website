@@ -26,8 +26,25 @@ const dirname = path.dirname(filename)
 // Tanpa S3_BUCKET (mis. saat development), file disimpan di folder lokal /media
 const useS3 = Boolean(process.env.S3_BUCKET)
 
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || ''
+
+// Alamat yang boleh memakai cookie login dashboard (perlindungan CSRF Payload).
+// Selain serverURL, alamat Vercel (per-deploy, per-branch, production) ikut diizinkan otomatis,
+// supaya dashboard tetap bisa menyimpan walaupun dibuka lewat URL Vercel mana pun.
+const trustedOrigins = [
+  serverURL,
+  ...[
+    process.env.VERCEL_URL,
+    process.env.VERCEL_BRANCH_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+  ]
+    .filter(Boolean)
+    .map((host) => `https://${host}`),
+].filter(Boolean)
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
+  serverURL,
+  csrf: trustedOrigins,
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import { Countdown } from '@/components/Countdown'
 import { Logo } from '@/components/Logo'
+import { PesantrenBackground } from '@/components/pesantren/PesantrenBackground'
 import { categoryLabels, formatDate, getMedia, mediaUrl } from '@/lib/format'
 import {
   getAdmissions,
@@ -125,30 +126,34 @@ export default async function HomePage() {
     <div className="mx-auto max-w-[74rem] space-y-16 px-3 pt-4 pb-16 sm:px-4 md:space-y-24">
       {/* ===== Hero bento ===== */}
       <section className="grid gap-3.5 lg:grid-cols-12">
-        <div className="pattern-green relative overflow-hidden rounded-[32px] p-7 text-white sm:p-10 lg:col-span-8 lg:p-12">
-          <div className="pointer-events-none absolute -right-24 -bottom-32 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgb(225_187_76/0.3),transparent_70%)]" />
-          <p className="font-arabic text-2xl text-gold-400">
-            بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
-          </p>
-          <h1 className="mt-5 text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Pondok Pesantren <span className="text-gold-400">Hurriyyatunnas</span> Bakti Awo
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-brand-100/85">
-            {home.heroSubtitle || site.tagline}
-          </p>
-          <div className="relative mt-9 flex flex-wrap gap-3">
-            <Link
-              href="/psb"
-              className="rounded-full bg-gold-400 px-7 py-3.5 font-bold text-brand-950 shadow-[0_12px_24px_-12px_rgb(225_187_76/0.8)] transition hover:-translate-y-0.5 hover:bg-gold-300"
-            >
-              Daftar Santri Baru {admissions.academicYear}
-            </Link>
-            <Link
-              href="/profil"
-              className="rounded-full border border-white/25 px-7 py-3.5 font-semibold transition hover:bg-white/10"
-            >
-              Kenali Kami
-            </Link>
+        <div className="pattern-green relative flex min-h-[720px] flex-col justify-end sm:min-h-[560px] overflow-hidden rounded-[32px] p-7 text-white sm:p-10 lg:col-span-8 lg:min-h-[600px] lg:justify-center lg:p-12">
+          {/* Latar animasi 3D lingkungan pesantren + gradasi supaya teks tetap terbaca */}
+          <PesantrenBackground />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/95 via-brand-950/55 to-transparent lg:bg-gradient-to-r lg:from-brand-950/90 lg:via-brand-950/45 lg:to-transparent" />
+          <div className="relative z-10">
+            <p className="font-arabic text-2xl text-gold-400">
+              بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+            </p>
+            <h1 className="mt-5 text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Pondok Pesantren <span className="text-gold-400">Hurriyyatunnas</span> Bakti Awo
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-brand-100/85">
+              {home.heroSubtitle || site.tagline}
+            </p>
+            <div className="relative mt-9 flex flex-wrap gap-3">
+              <Link
+                href="/psb"
+                className="rounded-full bg-gold-400 px-7 py-3.5 font-bold text-brand-950 shadow-[0_12px_24px_-12px_rgb(225_187_76/0.8)] transition hover:-translate-y-0.5 hover:bg-gold-300"
+              >
+                Daftar Santri Baru {admissions.academicYear}
+              </Link>
+              <Link
+                href="/profil"
+                className="rounded-full border border-white/25 px-7 py-3.5 font-semibold transition hover:bg-white/10"
+              >
+                Kenali Kami
+              </Link>
+            </div>
           </div>
         </div>
 
