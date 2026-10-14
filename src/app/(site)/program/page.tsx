@@ -35,7 +35,11 @@ export default async function ProgramPage() {
           <div className="grid gap-10 md:grid-cols-3">
             {program.levels.map((level, i) => (
               <div key={level.id ?? i} data-reveal>
-                <ArchPhoto src={photo(i)} alt={level.name} className="aspect-[4/5]" />
+                <ArchPhoto
+                  src={mediaUrl(level.photo, 'large') ?? photo(i)}
+                  alt={level.name}
+                  className="aspect-[4/5]"
+                />
                 <div className="mt-6">
                   {level.label && (
                     <span className="text-xs font-semibold tracking-[0.2em] text-[#a6821c] uppercase">

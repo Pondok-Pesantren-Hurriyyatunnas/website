@@ -884,6 +884,10 @@ export interface ProfilePage {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Tampil di samping sejarah (bingkai tegak). Kosongkan untuk memakai Foto Banner Beranda atau foto Galeri.
+   */
+  historyPhoto?: (string | null) | Media;
   vision?: string | null;
   missions?:
     | {
@@ -918,6 +922,10 @@ export interface ProgramPage {
          */
         label?: string | null;
         description?: string | null;
+        /**
+         * Tampil di Beranda & halaman Program (bingkai tegak). Kosongkan untuk memakai foto dari Galeri secara otomatis.
+         */
+        photo?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -1144,6 +1152,7 @@ export interface HomePageSelect<T extends boolean = true> {
  */
 export interface ProfilePageSelect<T extends boolean = true> {
   history?: T;
+  historyPhoto?: T;
   vision?: T;
   missions?:
     | T
@@ -1174,6 +1183,7 @@ export interface ProgramPageSelect<T extends boolean = true> {
         name?: T;
         label?: T;
         description?: T;
+        photo?: T;
         id?: T;
       };
   dailySchedule?:

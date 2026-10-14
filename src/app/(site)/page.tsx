@@ -292,7 +292,7 @@ export default async function HomePage() {
                 className="group"
               >
                 <ArchPhoto
-                  {...photo(i + 2)}
+                  src={mediaUrl(level.photo, 'large') ?? photo(i + 2).src}
                   alt={level.name}
                   className="aspect-[4/5] transition duration-500 group-hover:-translate-y-1.5"
                 />

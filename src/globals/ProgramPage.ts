@@ -33,6 +33,16 @@ export const ProgramPage: GlobalConfig = {
           ],
         },
         { name: 'description', label: 'Deskripsi', type: 'textarea' },
+        {
+          name: 'photo',
+          label: 'Foto',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description:
+              'Tampil di Beranda & halaman Program (bingkai tegak). Kosongkan untuk memakai foto dari Galeri secara otomatis.',
+          },
+        },
       ],
     },
     {

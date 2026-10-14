@@ -27,7 +27,10 @@ export default async function ProfilePage() {
     getGallery(),
   ])
   const t = await getPageTexts('profil')
-  const historyPhoto = mediaUrl(home.heroImage, 'large') ?? mediaUrl(gallery[0]?.image, 'large')
+  const historyPhoto =
+    mediaUrl(profile.historyPhoto, 'large') ??
+    mediaUrl(home.heroImage, 'large') ??
+    mediaUrl(gallery[0]?.image, 'large')
 
   return (
     <>

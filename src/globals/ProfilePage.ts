@@ -15,6 +15,16 @@ export const ProfilePage: GlobalConfig = {
   hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { name: 'history', label: 'Sejarah Singkat', type: 'richText' },
+    {
+      name: 'historyPhoto',
+      label: 'Foto Sejarah',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description:
+          'Tampil di samping sejarah (bingkai tegak). Kosongkan untuk memakai Foto Banner Beranda atau foto Galeri.',
+      },
+    },
     { name: 'vision', label: 'Visi', type: 'textarea' },
     {
       name: 'missions',
