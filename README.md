@@ -66,3 +66,4 @@ Admin pondok cukup punya akun GitHub (gratis) yang diundang sebagai **collaborat
 - [ ] Ganti kotak placeholder foto di Beranda dengan foto asli pondok
 - [ ] Hapus 2 contoh berita, lalu tambahkan berita asli
 - [ ] Ganti `site_url` di `public/admin/config.yml` dengan alamat website
+- [ ] Buka `public/robots.txt` supaya website bisa diindeks Google (sekarang masih mode preview)

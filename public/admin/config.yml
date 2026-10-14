@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: USERNAME-GITHUB/ponpes-hurriyyatunnas # ganti dengan repo GitHub kamu
+  repo: Pondok-Pesantren-Hurriyyatunnas/webiste
   branch: main
   # Isi setelah memasang Sveltia CMS Authenticator di Cloudflare Workers (lihat README):
   # base_url: https://sveltia-cms-auth.NAMA-AKUN.workers.dev
