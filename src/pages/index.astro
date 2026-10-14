@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsCard from '../components/NewsCard.astro';
+import site from '../data/site.json';
+import admissions from '../data/admissions.json';
+import { getPublishedNews } from '../lib/format';
+
+const latestNews = (await getPublishedNews()).slice(0, 3);
+
+const features = [
+  { title: 'Tahfidz Al-Qur’an', description: 'Program hafalan Al-Qur’an terbimbing dengan target bertahap dan setoran harian.' },
+  { title: 'Kajian Kitab Kuning', description: 'Pembelajaran kitab-kitab klasik sebagai fondasi ilmu agama yang kokoh.' },
+  { title: 'Pendidikan Formal', description: 'Kurikulum nasional berjalan seiring kurikulum kepesantrenan.' },
+  { title: 'Pembinaan Akhlak', description: 'Kehidupan asrama 24 jam yang membentuk disiplin, kemandirian, dan adab.' },
+];
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="pattern relative overflow-hidden bg-brand-900 text-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-5 md:py-28">
+      <div class="md:col-span-3">
+        <p class="font-arabic text-2xl text-gold-400">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+        <h1 class="mt-4 text-4xl leading-tight font-extrabold md:text-5xl">
+          Pondok Pesantren <span class="text-gold-400">Hurriyyatunnas</span> Bakti Awo
+        </h1>
+        <p class="mt-5 max-w-xl text-lg text-brand-100">{site.tagline}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/psb" class="rounded-full bg-gold-500 px-7 py-3 font-bold text-brand-950 transition hover:bg-gold-400">
+            Daftar Santri Baru {admissions.academicYear}
+          </a>
+          <a href="/profil" class="rounded-full border border-white/30 px-7 py-3 font-semibold transition hover:bg-white/10">
+            Kenali Kami
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:col-span-2 md:block">
+        <!-- Ganti dengan foto asli pondok: <img src="/uploads/foto-pondok.jpg" class="rounded-3xl" /> -->
+        <div class="flex aspect-square items-center justify-center rounded-3xl border border-white/15 bg-white/5">
+          <div class="text-center text-brand-200/70">
+            <div class="text-5xl">🕌</div>
+            <p class="mt-3 text-sm">Foto pondok di sini</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keunggulan -->
+  <section class="mx-auto max-w-6xl px-4 py-20">
+    <div class="text-center">
+      <p class="font-semibold text-gold-600">Mengapa Memilih Kami</p>
+      <h2 class="mt-2 text-3xl font-extrabold text-brand-950">Pendidikan yang Menyeluruh</h2>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {features.map((feature, i) => (
+        <div class="rounded-2xl border border-brand-100 bg-brand-50/50 p-6">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 font-bold text-gold-300">{i + 1}</div>
+          <h3 class="mt-4 text-lg font-bold text-brand-900">{feature.title}</h3>
+          <p class="mt-2 text-sm text-slate-600">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sambutan singkat -->
+  <section class="bg-brand-50">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-2">
+      <div class="flex aspect-[4/3] items-center justify-center rounded-3xl bg-brand-200/60 text-brand-800">
+        <p class="text-sm">Foto pimpinan pondok</p>
+      </div>
+      <div>
+        <p class="font-semibold text-gold-600">Sambutan Pimpinan</p>
+        <h2 class="mt-2 text-3xl font-extrabold text-brand-950">Assalamu’alaikum warahmatullahi wabarakatuh</h2>
+        <p class="mt-5 text-slate-600">
+          {site.description} Kami berkomitmen mendidik santri agar menjadi pribadi yang beriman, berilmu, dan berakhlakul karimah.
+        </p>
+        <a href="/profil" class="mt-6 inline-block font-semibold text-brand-700 hover:underline">Baca profil lengkap →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Berita terbaru -->
+  <section class="mx-auto max-w-6xl px-4 py-20">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="font-semibold text-gold-600">Kabar Pondok</p>
+        <h2 class="mt-2 text-3xl font-extrabold text-brand-950">Berita Terbaru</h2>
+      </div>
+      <a href="/berita" class="shrink-0 font-semibold text-brand-700 hover:underline">Semua berita →</a>
+    </div>
+    {latestNews.length > 0 ? (
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {latestNews.map((post) => <NewsCard post={post} />)}
+      </div>
+    ) : (
+      <p class="mt-10 text-slate-500">Belum ada berita.</p>
+    )}
+  </section>
+
+  <!-- CTA PSB -->
+  <section class="px-4 pb-20">
+    <div class="pattern mx-auto max-w-6xl rounded-3xl bg-brand-800 px-6 py-14 text-center text-white md:px-16">
+      <h2 class="text-3xl font-extrabold">Penerimaan Santri Baru {admissions.academicYear}</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-brand-100">
+        {admissions.isOpen ? 'Pendaftaran telah dibuka! Segera daftarkan putra-putri Anda.' : 'Pendaftaran saat ini belum dibuka. Pantau terus informasinya.'}
+      </p>
+      <a href="/psb" class="mt-8 inline-block rounded-full bg-gold-500 px-8 py-3 font-bold text-brand-950 transition hover:bg-gold-400">
+        Lihat Info Pendaftaran
+      </a>
+    </div>
+  </section>
+</Layout>

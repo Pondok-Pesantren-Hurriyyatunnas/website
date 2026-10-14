@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import site from '../data/site.json';
+import admissions from '../data/admissions.json';
+
+const steps = ['Isi formulir online', 'Lengkapi berkas persyaratan', 'Ikuti tes & wawancara', 'Pengumuman hasil', 'Daftar ulang'];
+const waUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya tentang pendaftaran santri baru ${admissions.academicYear}.`)}`;
+---
+
+<Layout title={`Penerimaan Santri Baru ${admissions.academicYear}`} description={`Info pendaftaran santri baru ${site.name} tahun ajaran ${admissions.academicYear}.`}>
+  <PageHeader title={`Penerimaan Santri Baru ${admissions.academicYear}`} subtitle="Syarat, jadwal, biaya, dan cara mendaftar." />
+
+  <section class="mx-auto max-w-6xl px-4 py-12">
+    <div class:list={['rounded-2xl p-6 md:flex md:items-center md:justify-between', admissions.isOpen ? 'bg-gold-300/30' : 'bg-slate-100']}>
+      <div>
+        <p class="text-lg font-bold text-brand-950">
+          {admissions.isOpen ? 'Pendaftaran sedang DIBUKA' : 'Pendaftaran belum dibuka / sudah ditutup'}
+        </p>
+        <p class="text-sm text-slate-600">Ada pertanyaan? Hubungi panitia lewat WhatsApp.</p>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3 md:mt-0">
+        {admissions.isOpen && (
+          <a href={admissions.registrationUrl} target="_blank" rel="noopener" class="rounded-full bg-brand-700 px-6 py-3 font-bold text-white hover:bg-brand-800">
+            Isi Formulir Pendaftaran
+          </a>
+        )}
+        <a href={waUrl} target="_blank" rel="noopener" class="rounded-full border border-brand-700 px-6 py-3 font-semibold text-brand-700 hover:bg-brand-50">
+          Tanya Panitia
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-12">
+    <h2 class="text-2xl font-extrabold text-brand-950">Alur Pendaftaran</h2>
+    <ol class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {steps.map((step, i) => (
+        <li class="rounded-2xl border border-brand-100 p-5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gold-500 font-bold text-brand-950">{i + 1}</span>
+          <p class="mt-3 font-semibold text-brand-900">{step}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-8 px-4 pb-20 lg:grid-cols-3">
+    <div class="rounded-2xl bg-brand-50 p-6">
+      <h2 class="text-xl font-extrabold text-brand-950">Persyaratan</h2>
+      <ul class="mt-4 space-y-2 text-slate-700">
+        {admissions.requirements.map((requirement) => <li class="flex gap-2"><span class="text-brand-600">✓</span>{requirement}</li>)}
+      </ul>
+    </div>
+    <div class="rounded-2xl bg-brand-50 p-6">
+      <h2 class="text-xl font-extrabold text-brand-950">Jadwal</h2>
+      <ul class="mt-4 space-y-3">
+        {admissions.schedule.map((item) => (
+          <li>
+            <div class="font-semibold text-brand-900">{item.activity}</div>
+            <div class="text-sm text-slate-600">{item.time}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="rounded-2xl bg-brand-50 p-6">
+      <h2 class="text-xl font-extrabold text-brand-950">Rincian Biaya</h2>
+      <table class="mt-4 w-full text-sm">
+        <tbody>
+          {admissions.fees.map((fee) => (
+            <tr class="border-b border-brand-100 last:border-0">
+              <td class="py-2 pr-2 text-slate-700">{fee.item}</td>
+              <td class="py-2 text-right font-semibold whitespace-nowrap text-brand-900">{fee.amount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+// Sesuaikan dengan jenjang & program yang benar-benar ada di pondok
+const levels = [
+  { name: 'Madrasah Tsanawiyah (MTs)', label: 'Setara SMP, 3 tahun', description: 'Kurikulum Kemenag dipadukan dengan pelajaran kepesantrenan.' },
+  { name: 'Madrasah Aliyah (MA)', label: 'Setara SMA, 3 tahun', description: 'Persiapan melanjutkan ke perguruan tinggi dengan bekal ilmu agama yang kuat.' },
+  { name: 'Program Tahfidz', label: 'Program unggulan', description: 'Bimbingan hafalan Al-Qur’an dengan metode talaqqi dan muraja’ah rutin.' },
+];
+
+const dailySchedule = [
+  { time: '04.00', activity: 'Bangun, shalat tahajud & persiapan subuh' },
+  { time: '04.30', activity: 'Shalat Subuh berjamaah & setoran hafalan' },
+  { time: '07.00', activity: 'Kegiatan belajar mengajar (sekolah formal)' },
+  { time: '12.00', activity: 'Shalat Dzuhur berjamaah & istirahat' },
+  { time: '14.00', activity: 'Kajian kitab / madrasah diniyah' },
+  { time: '15.30', activity: 'Shalat Ashar & ekstrakurikuler' },
+  { time: '18.00', activity: 'Shalat Maghrib & tadarus Al-Qur’an' },
+  { time: '19.30', activity: 'Shalat Isya & belajar malam' },
+  { time: '22.00', activity: 'Istirahat' },
+];
+
+const extracurriculars = ['Muhadharah (pidato)', 'Hadrah / Rebana', 'Pramuka', 'Kaligrafi', 'Bahasa Arab & Inggris', 'Olahraga'];
+---
+
+<Layout title="Program Pendidikan">
+  <PageHeader title="Program Pendidikan" subtitle="Jenjang pendidikan, kegiatan harian, dan ekstrakurikuler santri." />
+
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-2xl font-extrabold text-brand-950">Jenjang & Program</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {levels.map((level) => (
+        <div class="rounded-2xl border border-brand-100 p-6">
+          <span class="text-xs font-semibold tracking-wide text-gold-600 uppercase">{level.label}</span>
+          <h3 class="mt-2 text-xl font-bold text-brand-900">{level.name}</h3>
+          <p class="mt-3 text-sm text-slate-600">{level.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-brand-50">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-extrabold text-brand-950">Kegiatan Harian Santri</h2>
+        <ul class="mt-6 divide-y divide-brand-100 rounded-2xl bg-white">
+          {dailySchedule.map((item) => (
+            <li class="flex gap-4 px-5 py-3">
+              <span class="w-14 shrink-0 font-bold text-brand-700">{item.time}</span>
+              <span class="text-slate-700">{item.activity}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-2xl font-extrabold text-brand-950">Ekstrakurikuler</h2>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {extracurriculars.map((activity) => <span class="rounded-full bg-white px-4 py-2 font-medium text-brand-800">{activity}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

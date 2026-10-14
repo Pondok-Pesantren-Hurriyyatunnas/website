@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const photos = (await getCollection('gallery')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Galeri" description="Galeri foto kegiatan dan fasilitas pondok.">
+  <PageHeader title="Galeri" subtitle="Dokumentasi kegiatan dan fasilitas pondok." />
+
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    {photos.length > 0 ? (
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+        {photos.map((photo) => (
+          <figure class="overflow-hidden rounded-2xl bg-brand-50">
+            <img src={photo.data.image} alt={photo.data.title} loading="lazy" class="aspect-square w-full object-cover" />
+            <figcaption class="p-3">
+              <div class="text-sm font-semibold text-brand-900">{photo.data.title}</div>
+              {photo.data.caption && <div class="text-xs text-slate-500">{photo.data.caption}</div>}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-2xl border-2 border-dashed border-brand-200 p-12 text-center text-slate-500">
+        Belum ada foto. Tambahkan lewat dashboard admin, menu <strong>Galeri</strong>.
+      </div>
+    )}
+  </section>
+</Layout>

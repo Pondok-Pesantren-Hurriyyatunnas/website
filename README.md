@@ -18,10 +18,10 @@ npm run build    # hasil build ada di folder dist/
 | Lokasi | Isi |
 |---|---|
 | `src/pages/` | Halaman: beranda, profil, program, psb, berita, galeri, kontak |
-| `src/content/berita/` | Berita (file Markdown), diisi lewat dashboard |
-| `src/content/galeri/` | Foto galeri (file JSON), diisi lewat dashboard |
+| `src/content/news/` | Berita (file Markdown), diisi lewat dashboard |
+| `src/content/gallery/` | Foto galeri (file JSON), diisi lewat dashboard |
 | `src/data/site.json` | Nama, alamat, kontak, dan WhatsApp pondok (bisa diedit di dashboard) |
-| `src/data/psb.json` | Info PSB: tahun ajaran, jadwal, syarat, biaya, link Google Form (bisa diedit di dashboard) |
+| `src/data/admissions.json` | Info PSB: tahun ajaran, jadwal, syarat, biaya, link Google Form (bisa diedit di dashboard) |
 | `public/uploads/` | Gambar yang diupload dari dashboard |
 | `public/admin/config.yml` | Konfigurasi dashboard admin |
 | `src/components/Logo.astro` | Logo sementara. Ganti dengan logo resmi pondok |
@@ -59,7 +59,7 @@ Admin pondok cukup punya akun GitHub (gratis) yang diundang sebagai **collaborat
 
 ## Checklist sebelum online
 - [ ] Ganti data di `src/data/site.json` (alamat, telepon, WhatsApp, email, sosmed)
-- [ ] Ganti data PSB dan link Google Form di `src/data/psb.json`
+- [ ] Ganti data PSB dan link Google Form di `src/data/admissions.json`
 - [ ] Isi sejarah, visi misi, dan pengurus di halaman Profil
 - [ ] Sesuaikan jenjang dan kegiatan di halaman Program
 - [ ] Ganti logo sementara dengan logo resmi

@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import site from '../data/site.json';
+
+// Ganti teks di bawah sesuai data resmi pondok
+const missions = [
+  'Menyelenggarakan pendidikan Islam yang memadukan ilmu agama dan ilmu umum.',
+  'Membina santri agar istiqamah beribadah dan berakhlakul karimah.',
+  'Menumbuhkan kemandirian, kedisiplinan, dan jiwa kepemimpinan.',
+  'Menyiapkan generasi yang bermanfaat bagi masyarakat, bangsa, dan agama.',
+];
+
+const staff = [
+  { role: 'Pimpinan Pondok', name: '[Nama pimpinan]' },
+  { role: 'Kepala Madrasah', name: '[Nama]' },
+  { role: 'Bagian Kepesantrenan', name: '[Nama]' },
+  { role: 'Bagian Tata Usaha', name: '[Nama]' },
+];
+---
+
+<Layout title="Profil" description={`Sejarah, visi misi, dan pengurus ${site.name}.`}>
+  <PageHeader title="Profil Pondok" subtitle={`Mengenal lebih dekat ${site.name}.`} />
+
+  <section class="mx-auto max-w-4xl px-4 py-16">
+    <h2 class="text-2xl font-extrabold text-brand-950">Sejarah Singkat</h2>
+    <div class="mt-4 space-y-4 text-slate-700">
+      <p>
+        {site.name} berdiri pada tahun {site.foundedYear}. [Tuliskan kisah berdirinya pondok: siapa pendirinya, latar belakang
+        pendirian, dan perkembangan pondok hingga saat ini.]
+      </p>
+      <p>[Paragraf lanjutan sejarah pondok.]</p>
+    </div>
+  </section>
+
+  <section class="bg-brand-50">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-2">
+      <div class="rounded-2xl bg-brand-800 p-8 text-white">
+        <h2 class="text-2xl font-extrabold text-gold-400">Visi</h2>
+        <p class="mt-4 text-lg">“Terwujudnya generasi muslim yang beriman, berilmu, berakhlak mulia, dan bermanfaat bagi umat.”</p>
+      </div>
+      <div class="rounded-2xl bg-white p-8">
+        <h2 class="text-2xl font-extrabold text-brand-900">Misi</h2>
+        <ol class="mt-4 list-decimal space-y-2 pl-5 text-slate-700">
+          {missions.map((mission) => <li>{mission}</li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-center text-2xl font-extrabold text-brand-950">Struktur Pengurus</h2>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {staff.map((member) => (
+        <div class="rounded-2xl border border-slate-200 p-6 text-center">
+          <div class="mx-auto h-24 w-24 rounded-full bg-brand-100"></div>
+          <div class="mt-4 font-bold text-brand-900">{member.name}</div>
+          <div class="text-sm text-slate-500">{member.role}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,24 @@
+{
+  "academicYear": "2027/2028",
+  "isOpen": true,
+  "registrationUrl": "https://forms.gle/ganti-dengan-link-google-form",
+  "schedule": [
+    { "activity": "Pendaftaran Gelombang 1", "time": "[isi tanggal]" },
+    { "activity": "Tes Masuk & Wawancara", "time": "[isi tanggal]" },
+    { "activity": "Pengumuman Hasil", "time": "[isi tanggal]" },
+    { "activity": "Daftar Ulang", "time": "[isi tanggal]" }
+  ],
+  "requirements": [
+    "Mengisi formulir pendaftaran",
+    "Fotokopi akta kelahiran dan kartu keluarga",
+    "Fotokopi ijazah / surat keterangan lulus",
+    "Pas foto 3x4 (4 lembar)",
+    "Surat keterangan sehat dari dokter"
+  ],
+  "fees": [
+    { "item": "Uang pendaftaran", "amount": "Rp [isi]" },
+    { "item": "Uang pangkal / pembangunan", "amount": "Rp [isi]" },
+    { "item": "Seragam & perlengkapan", "amount": "Rp [isi]" },
+    { "item": "SPP & makan per bulan", "amount": "Rp [isi]" }
+  ]
+}
