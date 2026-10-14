@@ -9,6 +9,8 @@ export type SceneOptions = {
   lowPower?: boolean
   /** Render satu frame saja (untuk pengguna yang memilih "kurangi animasi"). */
   staticFrame?: boolean
+  /** Batas devicePixelRatio (kanvas layar penuh sebaiknya lebih rendah supaya ringan). */
+  maxPixelRatio?: number
 }
 
 export type SceneHandle = {
@@ -16,6 +18,8 @@ export type SceneHandle = {
   stop: () => void
   resize: () => void
   setPointer: (x: number, y: number) => void
+  /** Posisi gulir halaman 0–1: kamera berputar mengitari pesantren saat digulir. */
+  setScroll: (progress: number) => void
   dispose: () => void
 }
 
@@ -134,7 +138,9 @@ export function createPesantrenScene(
   } catch {
     return null // WebGL tidak tersedia: latar hijau bawaan tetap tampil
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1 : 1.5))
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, lowPower ? 1 : (options.maxPixelRatio ?? 1.5)),
+  )
   renderer.outputColorSpace = THREE.SRGBColorSpace
   renderer.shadowMap.enabled = !lowPower
   renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -589,14 +595,17 @@ export function createPesantrenScene(
   let height = 1
   const pointer = new THREE.Vector2(0, 0)
   const pointerSmooth = new THREE.Vector2(0, 0)
+  let scrollTarget = 0
+  let scrollSmooth = 0
   const updateCamera = (time: number) => {
     pointerSmooth.lerp(pointer, 0.04)
-    const angle = -0.55 + Math.sin(time * 0.05) * 0.18 + pointerSmooth.x * 0.25
+    scrollSmooth += (scrollTarget - scrollSmooth) * 0.06
+    const angle = -0.55 + Math.sin(time * 0.05) * 0.18 + pointerSmooth.x * 0.25 + scrollSmooth * 1.6
     // Cukup jauh supaya seluruh "pulau" diorama terlihat utuh
     const radius = width < 640 ? 96 : 86
     camera.position.set(
       Math.sin(angle) * radius,
-      34 + pointerSmooth.y * 5,
+      34 + pointerSmooth.y * 5 - scrollSmooth * 12,
       Math.cos(angle) * radius,
     )
     camera.lookAt(0, -1, 2)
@@ -722,6 +731,9 @@ export function createPesantrenScene(
       if (!running) renderFrame(0, clock.elapsedTime)
     },
     setPointer: (x: number, y: number) => pointer.set(x, y),
+    setScroll: (progress: number) => {
+      scrollTarget = THREE.MathUtils.clamp(progress, 0, 1)
+    },
     dispose: () => {
       running = false
       cancelAnimationFrame(frame)

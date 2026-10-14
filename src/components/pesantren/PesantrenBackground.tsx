@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 
 import type { SceneHandle } from './scene'
 
-// Latar animasi 3D lingkungan pesantren untuk kartu hero beranda.
+// Latar animasi 3D lingkungan pesantren.
 // Scene dimuat terpisah (dynamic import) setelah halaman tampil, dan otomatis berhenti
-// saat tidak terlihat. Jika WebGL tidak tersedia, latar hijau bawaan kartu tetap tampil.
-export function PesantrenBackground() {
+// saat tidak terlihat. Jika WebGL tidak tersedia, latar di belakangnya tetap tampil.
+// `fullPage`: latar layar penuh di belakang seluruh beranda; kamera ikut posisi gulir.
+export function PesantrenBackground({ fullPage = false }: { fullPage?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [ready, setReady] = useState(false)
 
@@ -37,6 +38,7 @@ export function PesantrenBackground() {
         hourOverride,
         lowPower: smallScreen || lowCpu || saveData,
         staticFrame: reducedMotion,
+        maxPixelRatio: fullPage ? 1.25 : 1.5,
       })
       if (!handle) return
       setReady(true)
@@ -71,6 +73,16 @@ export function PesantrenBackground() {
       window.addEventListener('pointermove', onPointer, { passive: true })
       cleanups.push(() => window.removeEventListener('pointermove', onPointer))
 
+      if (fullPage) {
+        const onScroll = () => {
+          const scrollable = document.documentElement.scrollHeight - window.innerHeight
+          handle?.setScroll(scrollable > 0 ? window.scrollY / scrollable : 0)
+        }
+        onScroll()
+        window.addEventListener('scroll', onScroll, { passive: true })
+        cleanups.push(() => window.removeEventListener('scroll', onScroll))
+      }
+
       syncRunning()
     })
 
@@ -79,7 +91,7 @@ export function PesantrenBackground() {
       cleanups.forEach((cleanup) => cleanup())
       handle?.dispose()
     }
-  }, [])
+  }, [fullPage])
 
   return (
     <canvas
