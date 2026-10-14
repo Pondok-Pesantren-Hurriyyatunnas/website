@@ -4,8 +4,9 @@ import Link from 'next/link'
 
 import { Rosette } from '@/components/geometri/Rosette'
 import { ArchPhoto } from '@/components/site/ArchPhoto'
+import { HeroSlideshow, type HeroSlide } from '@/components/site/HeroSlideshow'
 import { SectionHeading } from '@/components/site/SectionHeading'
-import { categoryLabels, formatDate, mediaUrl, whatsappUrl } from '@/lib/format'
+import { categoryLabels, formatDate, getMedia, mediaUrl, whatsappUrl } from '@/lib/format'
 import {
   getAdmissions,
   getGallery,
@@ -54,6 +55,27 @@ export default async function HomePage() {
   ].filter((photo) => photo.src)
   const photo = (i: number) =>
     photos.length ? photos[i % photos.length] : { src: undefined, alt: site.name }
+
+  // Slideshow hero: foto banner dari dashboard lebih dulu, lalu foto-foto galeri
+  const heroSlides: HeroSlide[] = [
+    ...(home.heroImage
+      ? [
+          {
+            src: mediaUrl(home.heroImage, 'large'),
+            alt: getMedia(home.heroImage)?.alt || site.name,
+            title: getMedia(home.heroImage)?.alt || site.name,
+          },
+        ]
+      : []),
+    ...gallery.map((item) => ({
+      src: mediaUrl(item.image, 'large'),
+      alt: item.title,
+      title: item.title,
+    })),
+  ]
+    // Buang foto tanpa URL, lalu foto yang sama (mis. banner yang juga ada di galeri)
+    .flatMap((slide) => (slide.src ? [{ ...slide, src: slide.src }] : []))
+    .filter((slide, i, all) => all.findIndex((other) => other.src === slide.src) === i)
   const waUrl = whatsappUrl(
     site.whatsapp,
     `Assalamu'alaikum, saya ingin bertanya tentang ${site.name}.`,
@@ -174,27 +196,13 @@ export default async function HomePage() {
 
           <div className="relative lg:col-span-6">
             {/* Ornamen samar di belakang bingkai */}
-            <div className="rosette-mask pointer-events-none absolute top-1/2 left-1/2 w-[130%] -translate-x-1/2 -translate-y-1/2 opacity-[0.22]">
+            <div className="rosette-mask pointer-events-none absolute top-1/2 left-1/2 w-[125%] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]">
               <Rosette className="h-auto w-full" />
             </div>
-            <div className="relative mx-auto grid max-w-xl grid-cols-5 items-end gap-4">
-              <ArchPhoto
-                {...photo(0)}
-                className="intro col-span-3 aspect-[3/4.3] shadow-[0_30px_60px_-30px_rgb(11_36_24/0.6)]"
-              />
-              <div className="col-span-2 flex flex-col gap-4">
-                <ArchPhoto
-                  {...photo(1)}
-                  className="intro aspect-[3/4] shadow-[0_24px_50px_-28px_rgb(11_36_24/0.6)]"
-                />
-                <div
-                  className="intro flex aspect-square items-center justify-center rounded-full bg-[#0b2418] p-3"
-                  style={delay(0.6)}
-                >
-                  <Rosette className="h-full w-full" />
-                </div>
-              </div>
-            </div>
+            <HeroSlideshow
+              slides={heroSlides}
+              className="intro mx-auto aspect-[4/5] w-full max-w-[460px]"
+            />
           </div>
         </div>
       </section>
