@@ -25,7 +25,11 @@ export function Footer({ site }: { site: SiteSetting }) {
                 <div className="text-sm font-semibold text-gold-400">Bakti Awo</div>
               </div>
             </div>
-            {site.tagline && <p className="mt-5 max-w-sm text-sm leading-relaxed text-brand-100/75">{site.tagline}</p>}
+            {site.tagline && (
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-brand-100/75">
+                {site.tagline}
+              </p>
+            )}
             <Link
               href="/psb"
               className="mt-6 inline-flex rounded-full bg-gold-400 px-5 py-2.5 text-sm font-bold text-brand-950 transition hover:bg-gold-300"
@@ -34,7 +38,9 @@ export function Footer({ site }: { site: SiteSetting }) {
             </Link>
           </div>
           <div>
-            <h3 className="mb-4 text-xs font-bold tracking-[0.15em] text-gold-400 uppercase">Jelajahi</h3>
+            <h3 className="mb-4 text-xs font-bold tracking-[0.15em] text-gold-400 uppercase">
+              Jelajahi
+            </h3>
             <ul className="grid grid-cols-2 gap-2.5 text-sm">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -51,7 +57,9 @@ export function Footer({ site }: { site: SiteSetting }) {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-xs font-bold tracking-[0.15em] text-gold-400 uppercase">Kontak</h3>
+            <h3 className="mb-4 text-xs font-bold tracking-[0.15em] text-gold-400 uppercase">
+              Kontak
+            </h3>
             <ul className="space-y-2.5 text-sm text-brand-100/80">
               {site.address && <li className="whitespace-pre-line">{site.address}</li>}
               {site.phone && <li>Telp. {site.phone}</li>}

@@ -20,7 +20,12 @@ export const ProgramPage: GlobalConfig = {
           type: 'row',
           fields: [
             { name: 'name', label: 'Nama', type: 'text', required: true },
-            { name: 'label', label: 'Keterangan singkat', type: 'text', admin: { description: 'Mis. "Setara SMP, 3 tahun"' } },
+            {
+              name: 'label',
+              label: 'Keterangan singkat',
+              type: 'text',
+              admin: { description: 'Mis. "Setara SMP, 3 tahun"' },
+            },
           ],
         },
         { name: 'description', label: 'Deskripsi', type: 'textarea' },

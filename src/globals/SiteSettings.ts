@@ -19,9 +19,20 @@ export const SiteSettings: GlobalConfig = {
             { name: 'name', label: 'Nama Pondok', type: 'text', required: true },
             { name: 'shortName', label: 'Nama Singkat', type: 'text' },
             { name: 'tagline', label: 'Tagline', type: 'text' },
-            { name: 'description', label: 'Deskripsi Singkat', type: 'textarea', admin: { description: 'Dipakai untuk SEO dan footer.' } },
+            {
+              name: 'description',
+              label: 'Deskripsi Singkat',
+              type: 'textarea',
+              admin: { description: 'Dipakai untuk SEO dan footer.' },
+            },
             { name: 'foundedYear', label: 'Tahun Berdiri', type: 'text' },
-            { name: 'logo', label: 'Logo', type: 'upload', relationTo: 'media', admin: { description: 'Kosongkan untuk memakai logo bawaan.' } },
+            {
+              name: 'logo',
+              label: 'Logo',
+              type: 'upload',
+              relationTo: 'media',
+              admin: { description: 'Kosongkan untuk memakai logo bawaan.' },
+            },
           ],
         },
         {
@@ -33,12 +44,21 @@ export const SiteSettings: GlobalConfig = {
               name: 'whatsapp',
               label: 'Nomor WhatsApp',
               type: 'text',
-              admin: { description: 'Format internasional tanpa + dan spasi, contoh 6281234567890' },
+              admin: {
+                description: 'Format internasional tanpa + dan spasi, contoh 6281234567890',
+              },
               validate: (value: string | null | undefined) =>
-                !value || /^62\d{8,13}$/.test(value) || 'Gunakan format 62xxxxxxxxxx tanpa + atau spasi',
+                !value ||
+                /^62\d{8,13}$/.test(value) ||
+                'Gunakan format 62xxxxxxxxxx tanpa + atau spasi',
             },
             { name: 'email', label: 'Email', type: 'email' },
-            { name: 'mapsQuery', label: 'Kata kunci Google Maps', type: 'text', admin: { description: 'Nama tempat seperti yang muncul di Google Maps.' } },
+            {
+              name: 'mapsQuery',
+              label: 'Kata kunci Google Maps',
+              type: 'text',
+              admin: { description: 'Nama tempat seperti yang muncul di Google Maps.' },
+            },
           ],
         },
         {

@@ -24,7 +24,11 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Dokumentasi" title="Galeri" subtitle="Dokumentasi kegiatan dan fasilitas pondok." />
+      <PageHeader
+        eyebrow="Dokumentasi"
+        title="Galeri"
+        subtitle="Dokumentasi kegiatan dan fasilitas pondok."
+      />
       <section className="mx-auto max-w-[74rem] px-3 pt-3.5 pb-16 sm:px-4">
         {photos.length > 0 ? (
           <GalleryLightbox photos={photos} />

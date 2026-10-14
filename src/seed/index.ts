@@ -55,10 +55,23 @@ if (!home.features?.length) {
     data: {
       featuresHeading: 'Pendidikan yang Menyeluruh',
       features: [
-        { title: 'Tahfidz Al-Qur’an', description: 'Program hafalan Al-Qur’an terbimbing dengan target bertahap dan setoran harian.' },
-        { title: 'Kajian Kitab Kuning', description: 'Pembelajaran kitab-kitab klasik sebagai fondasi ilmu agama yang kokoh.' },
-        { title: 'Pendidikan Formal', description: 'Kurikulum nasional berjalan seiring kurikulum kepesantrenan.' },
-        { title: 'Pembinaan Akhlak', description: 'Kehidupan asrama 24 jam yang membentuk disiplin, kemandirian, dan adab.' },
+        {
+          title: 'Tahfidz Al-Qur’an',
+          description:
+            'Program hafalan Al-Qur’an terbimbing dengan target bertahap dan setoran harian.',
+        },
+        {
+          title: 'Kajian Kitab Kuning',
+          description: 'Pembelajaran kitab-kitab klasik sebagai fondasi ilmu agama yang kokoh.',
+        },
+        {
+          title: 'Pendidikan Formal',
+          description: 'Kurikulum nasional berjalan seiring kurikulum kepesantrenan.',
+        },
+        {
+          title: 'Pembinaan Akhlak',
+          description: 'Kehidupan asrama 24 jam yang membentuk disiplin, kemandirian, dan adab.',
+        },
       ],
       welcomeHeading: 'Assalamu’alaikum warahmatullahi wabarakatuh',
       welcomeBody:
@@ -78,7 +91,8 @@ if (!profile.missions?.length) {
         '[Tuliskan kisah berdirinya pondok: siapa pendirinya, latar belakang pendirian, dan perkembangan pondok hingga saat ini.]',
         '[Paragraf lanjutan sejarah pondok.]',
       ),
-      vision: 'Terwujudnya generasi muslim yang beriman, berilmu, berakhlak mulia, dan bermanfaat bagi umat.',
+      vision:
+        'Terwujudnya generasi muslim yang beriman, berilmu, berakhlak mulia, dan bermanfaat bagi umat.',
       missions: [
         { text: 'Menyelenggarakan pendidikan Islam yang memadukan ilmu agama dan ilmu umum.' },
         { text: 'Membina santri agar istiqamah beribadah dan berakhlakul karimah.' },
@@ -102,9 +116,22 @@ if (!program.levels?.length) {
     slug: 'program-page',
     data: {
       levels: [
-        { name: 'Madrasah Tsanawiyah (MTs)', label: 'Setara SMP, 3 tahun', description: 'Kurikulum Kemenag dipadukan dengan pelajaran kepesantrenan.' },
-        { name: 'Madrasah Aliyah (MA)', label: 'Setara SMA, 3 tahun', description: 'Persiapan melanjutkan ke perguruan tinggi dengan bekal ilmu agama yang kuat.' },
-        { name: 'Program Tahfidz', label: 'Program unggulan', description: 'Bimbingan hafalan Al-Qur’an dengan metode talaqqi dan muraja’ah rutin.' },
+        {
+          name: 'Madrasah Tsanawiyah (MTs)',
+          label: 'Setara SMP, 3 tahun',
+          description: 'Kurikulum Kemenag dipadukan dengan pelajaran kepesantrenan.',
+        },
+        {
+          name: 'Madrasah Aliyah (MA)',
+          label: 'Setara SMA, 3 tahun',
+          description:
+            'Persiapan melanjutkan ke perguruan tinggi dengan bekal ilmu agama yang kuat.',
+        },
+        {
+          name: 'Program Tahfidz',
+          label: 'Program unggulan',
+          description: 'Bimbingan hafalan Al-Qur’an dengan metode talaqqi dan muraja’ah rutin.',
+        },
       ],
       dailySchedule: [
         { time: '04.00', activity: 'Bangun, shalat tahajud & persiapan subuh' },
@@ -117,9 +144,14 @@ if (!program.levels?.length) {
         { time: '19.30', activity: 'Shalat Isya & belajar malam' },
         { time: '22.00', activity: 'Istirahat' },
       ],
-      extracurriculars: ['Muhadharah (pidato)', 'Hadrah / Rebana', 'Pramuka', 'Kaligrafi', 'Bahasa Arab & Inggris', 'Olahraga'].map(
-        (name) => ({ name }),
-      ),
+      extracurriculars: [
+        'Muhadharah (pidato)',
+        'Hadrah / Rebana',
+        'Pramuka',
+        'Kaligrafi',
+        'Bahasa Arab & Inggris',
+        'Olahraga',
+      ].map((name) => ({ name })),
     },
   })
   payload.logger.info('✓ Program Pendidikan')
@@ -133,9 +165,13 @@ if (!admissions.levels?.length) {
       academicYear: '2027/2028',
       isOpen: true,
       levels: [{ name: 'MTs (Setara SMP)' }, { name: 'MA (Setara SMA)' }],
-      steps: ['Isi formulir online', 'Lengkapi berkas persyaratan', 'Ikuti tes & wawancara', 'Pengumuman hasil', 'Daftar ulang'].map(
-        (text) => ({ text }),
-      ),
+      steps: [
+        'Isi formulir online',
+        'Lengkapi berkas persyaratan',
+        'Ikuti tes & wawancara',
+        'Pengumuman hasil',
+        'Daftar ulang',
+      ].map((text) => ({ text })),
       requirements: [
         'Mengisi formulir pendaftaran',
         'Fotokopi akta kelahiran dan kartu keluarga',
@@ -168,7 +204,8 @@ if (newsCount === 0) {
       title: 'Contoh Berita: Pendaftaran Santri Baru Resmi Dibuka',
       publishedAt: '2026-10-01T00:00:00.000Z',
       category: 'announcement',
-      excerpt: 'Ini adalah contoh berita. Hapus atau edit lewat dashboard admin, lalu ganti dengan berita asli pondok.',
+      excerpt:
+        'Ini adalah contoh berita. Hapus atau edit lewat dashboard admin, lalu ganti dengan berita asli pondok.',
       content: richText(
         'Ini adalah contoh berita untuk menunjukkan tampilan halaman artikel. Silakan hapus atau ubah lewat dashboard admin.',
         'Pendaftaran santri baru kini dapat dilakukan langsung secara online melalui halaman PSB.',
@@ -183,7 +220,9 @@ if (newsCount === 0) {
       publishedAt: '2026-09-20T00:00:00.000Z',
       category: 'activity',
       excerpt: 'Contoh berita kegiatan santri. Ganti dengan dokumentasi kegiatan asli pondok.',
-      content: richText('Ini adalah contoh berita kegiatan. Tambahkan Gambar Utama di dashboard agar tampilan berita lebih menarik.'),
+      content: richText(
+        'Ini adalah contoh berita kegiatan. Tambahkan Gambar Utama di dashboard agar tampilan berita lebih menarik.',
+      ),
       _status: 'published',
     },
   })

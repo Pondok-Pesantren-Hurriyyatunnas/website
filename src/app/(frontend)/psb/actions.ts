@@ -29,9 +29,15 @@ const normalizePhone = (value: string) => {
   return digits.startsWith('0') ? `62${digits.slice(1)}` : digits
 }
 
-const getText = (formData: FormData, key: string) => String(formData.get(key) ?? '').trim().slice(0, 1000)
+const getText = (formData: FormData, key: string) =>
+  String(formData.get(key) ?? '')
+    .trim()
+    .slice(0, 1000)
 
-export async function submitRegistration(_prev: RegistrationState, formData: FormData): Promise<RegistrationState> {
+export async function submitRegistration(
+  _prev: RegistrationState,
+  formData: FormData,
+): Promise<RegistrationState> {
   // Jebakan bot: field ini disembunyikan dari manusia, jadi harus kosong
   if (getText(formData, 'website')) return { status: 'success', registrationNumber: '-' }
 
@@ -42,7 +48,9 @@ export async function submitRegistration(_prev: RegistrationState, formData: For
   }
 
   const values = Object.fromEntries(
-    [...Object.keys(requiredFields), 'nisn', 'parentOccupation', 'parentEmail', 'notes'].map((key) => [key, getText(formData, key)]),
+    [...Object.keys(requiredFields), 'nisn', 'parentOccupation', 'parentEmail', 'notes'].map(
+      (key) => [key, getText(formData, key)],
+    ),
   )
 
   const fieldErrors: Record<string, string> = {}
@@ -70,7 +78,12 @@ export async function submitRegistration(_prev: RegistrationState, formData: For
   }
 
   if (Object.keys(fieldErrors).length > 0) {
-    return { status: 'error', message: 'Periksa kembali data yang belum lengkap.', fieldErrors, values }
+    return {
+      status: 'error',
+      message: 'Periksa kembali data yang belum lengkap.',
+      fieldErrors,
+      values,
+    }
   }
 
   try {
@@ -98,6 +111,10 @@ export async function submitRegistration(_prev: RegistrationState, formData: For
     return { status: 'success', registrationNumber: registration.registrationNumber ?? undefined }
   } catch (error) {
     payload.logger.error({ err: error }, 'Gagal menyimpan pendaftaran PSB')
-    return { status: 'error', message: 'Terjadi kesalahan saat menyimpan. Silakan coba lagi atau hubungi panitia.', values }
+    return {
+      status: 'error',
+      message: 'Terjadi kesalahan saat menyimpan. Silakan coba lagi atau hubungi panitia.',
+      values,
+    }
   }
 }

@@ -9,7 +9,10 @@ export function NewsCard({ post }: { post: News }) {
   const thumbnail = mediaUrl(post.thumbnail, 'card')
 
   return (
-    <Link href={`/berita/${post.slug}`} className="card-bento group flex flex-col p-3 transition hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgb(16_59_38/0.4)]">
+    <Link
+      href={`/berita/${post.slug}`}
+      className="card-bento group flex flex-col p-3 transition hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgb(16_59_38/0.4)]"
+    >
       {thumbnail ? (
         <img
           src={thumbnail}
@@ -29,7 +32,9 @@ export function NewsCard({ post }: { post: News }) {
           </span>
           <span className="text-slate-500">{formatDate(post.publishedAt)}</span>
         </div>
-        <h3 className="mt-3 text-lg leading-snug font-bold text-brand-950 group-hover:text-brand-700">{post.title}</h3>
+        <h3 className="mt-3 text-lg leading-snug font-bold text-brand-950 group-hover:text-brand-700">
+          {post.title}
+        </h3>
         {post.excerpt && <p className="mt-2 line-clamp-2 text-sm text-slate-600">{post.excerpt}</p>}
         <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-brand-700">
           Baca selengkapnya

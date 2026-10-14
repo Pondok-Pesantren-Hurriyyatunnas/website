@@ -30,7 +30,9 @@ export function Header({ logo }: { logo: ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  isActive(item.href) ? 'bg-white text-brand-800 shadow-sm' : 'text-slate-500 hover:text-brand-800'
+                  isActive(item.href)
+                    ? 'bg-white text-brand-800 shadow-sm'
+                    : 'text-slate-500 hover:text-brand-800'
                 }`}
               >
                 {item.label}
@@ -51,7 +53,14 @@ export function Header({ logo }: { logo: ReactNode }) {
               aria-expanded={isOpen}
               onClick={() => setIsOpen((open) => !open)}
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                viewBox="0 0 24 24"
+              >
                 {isOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
               </svg>
             </button>

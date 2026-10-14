@@ -15,7 +15,11 @@ export default async function NewsListPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Kabar pondok" title="Berita & Kegiatan" subtitle="Kabar terbaru dari lingkungan pondok." />
+      <PageHeader
+        eyebrow="Kabar pondok"
+        title="Berita & Kegiatan"
+        subtitle="Kabar terbaru dari lingkungan pondok."
+      />
       <section className="mx-auto max-w-[74rem] px-3 pt-3.5 pb-16 sm:px-4">
         {posts.length > 0 ? (
           <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">

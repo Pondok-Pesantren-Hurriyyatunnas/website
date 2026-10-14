@@ -1,5 +1,9 @@
 import { revalidatePath } from 'next/cache'
-import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, GlobalAfterChangeHook } from 'payload'
+import type {
+  CollectionAfterChangeHook,
+  CollectionAfterDeleteHook,
+  GlobalAfterChangeHook,
+} from 'payload'
 
 // Setiap konten berubah, seluruh halaman website dibangun ulang saat dikunjungi berikutnya.
 // Dibungkus try/catch karena hook juga bisa jalan di luar Next.js (mis. saat `npm run seed`).

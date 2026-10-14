@@ -16,7 +16,13 @@ export const Admissions: GlobalConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'academicYear', label: 'Tahun Ajaran', type: 'text', required: true, defaultValue: '2027/2028' },
+        {
+          name: 'academicYear',
+          label: 'Tahun Ajaran',
+          type: 'text',
+          required: true,
+          defaultValue: '2027/2028',
+        },
         {
           name: 'isOpen',
           label: 'Pendaftaran dibuka',
@@ -31,7 +37,8 @@ export const Admissions: GlobalConfig = {
       label: 'Tanggal penutupan pendaftaran',
       type: 'date',
       admin: {
-        description: 'Dipakai untuk hitung mundur di dashboard. Formulir tidak otomatis tertutup; matikan "Pendaftaran dibuka" secara manual.',
+        description:
+          'Dipakai untuk hitung mundur di dashboard. Formulir tidak otomatis tertutup; matikan "Pendaftaran dibuka" secara manual.',
         date: { pickerAppearance: 'dayAndTime', displayFormat: 'd MMMM yyyy, HH:mm' },
       },
     },

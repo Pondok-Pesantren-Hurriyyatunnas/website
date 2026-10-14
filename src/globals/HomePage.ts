@@ -16,7 +16,12 @@ export const HomePage: GlobalConfig = {
         {
           label: 'Banner Utama',
           fields: [
-            { name: 'heroSubtitle', label: 'Teks di bawah judul', type: 'textarea', admin: { description: 'Kosongkan untuk memakai tagline pondok.' } },
+            {
+              name: 'heroSubtitle',
+              label: 'Teks di bawah judul',
+              type: 'textarea',
+              admin: { description: 'Kosongkan untuk memakai tagline pondok.' },
+            },
             { name: 'heroImage', label: 'Foto Banner', type: 'upload', relationTo: 'media' },
           ],
         },
@@ -37,7 +42,13 @@ export const HomePage: GlobalConfig = {
                 {
                   type: 'row',
                   fields: [
-                    { name: 'value', label: 'Angka', type: 'text', required: true, admin: { width: '35%' } },
+                    {
+                      name: 'value',
+                      label: 'Angka',
+                      type: 'text',
+                      required: true,
+                      admin: { width: '35%' },
+                    },
                     { name: 'label', label: 'Keterangan', type: 'text', required: true },
                   ],
                 },
@@ -48,7 +59,12 @@ export const HomePage: GlobalConfig = {
         {
           label: 'Keunggulan',
           fields: [
-            { name: 'featuresHeading', label: 'Judul Bagian', type: 'text', defaultValue: 'Pendidikan yang Menyeluruh' },
+            {
+              name: 'featuresHeading',
+              label: 'Judul Bagian',
+              type: 'text',
+              defaultValue: 'Pendidikan yang Menyeluruh',
+            },
             {
               name: 'features',
               label: 'Daftar Keunggulan',
@@ -65,7 +81,12 @@ export const HomePage: GlobalConfig = {
         {
           label: 'Sambutan Pimpinan',
           fields: [
-            { name: 'welcomeHeading', label: 'Judul', type: 'text', defaultValue: 'Assalamu’alaikum warahmatullahi wabarakatuh' },
+            {
+              name: 'welcomeHeading',
+              label: 'Judul',
+              type: 'text',
+              defaultValue: 'Assalamu’alaikum warahmatullahi wabarakatuh',
+            },
             { name: 'welcomeBody', label: 'Isi Sambutan', type: 'textarea' },
             { name: 'leaderName', label: 'Nama Pimpinan', type: 'text' },
             { name: 'leaderPhoto', label: 'Foto Pimpinan', type: 'upload', relationTo: 'media' },

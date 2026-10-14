@@ -32,7 +32,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function FrontendLayout({ children }: { children: ReactNode }) {
   const site = await getSiteSettings()
-  const waUrl = whatsappUrl(site.whatsapp, `Assalamu'alaikum, saya ingin bertanya tentang ${site.name}.`)
+  const waUrl = whatsappUrl(
+    site.whatsapp,
+    `Assalamu'alaikum, saya ingin bertanya tentang ${site.name}.`,
+  )
   const organization = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
@@ -41,8 +44,11 @@ export default async function FrontendLayout({ children }: { children: ReactNode
     description: site.description || undefined,
     url: siteUrl,
     logo: mediaUrl(site.logo) ?? absoluteUrl('/favicon.svg'),
-    foundingDate: site.foundedYear && /^\d{4}$/.test(site.foundedYear) ? site.foundedYear : undefined,
-    address: site.address ? { '@type': 'PostalAddress', streetAddress: site.address, addressCountry: 'ID' } : undefined,
+    foundingDate:
+      site.foundedYear && /^\d{4}$/.test(site.foundedYear) ? site.foundedYear : undefined,
+    address: site.address
+      ? { '@type': 'PostalAddress', streetAddress: site.address, addressCountry: 'ID' }
+      : undefined,
     telephone: site.phone || undefined,
     email: site.email || undefined,
     sameAs: [site.instagram, site.facebook, site.youtube].filter(Boolean),
@@ -51,7 +57,10 @@ export default async function FrontendLayout({ children }: { children: ReactNode
   return (
     <html lang="id" className={`${jakarta.variable} ${amiri.variable}`}>
       {/* suppressHydrationWarning: ekstensi browser (mis. ColorZilla) sering menambah atribut ke <body> */}
-      <body className="flex min-h-screen flex-col bg-paper font-sans text-slate-800 antialiased" suppressHydrationWarning>
+      <body
+        className="flex min-h-screen flex-col bg-paper font-sans text-slate-800 antialiased"
+        suppressHydrationWarning
+      >
         <Header logo={<Logo className="h-10 w-10" logo={site.logo} />} />
         <main className="flex-1">{children}</main>
         <Footer site={site} />

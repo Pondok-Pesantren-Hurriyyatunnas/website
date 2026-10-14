@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
@@ -34,13 +34,21 @@ html {
 
 /* Garis-garis miring untuk aksen (seperti batang kosong di dashboard) */
 .stripes {
-  background-image: repeating-linear-gradient(135deg, rgb(159 179 166 / 0.55) 0 3px, transparent 3px 9px);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(159 179 166 / 0.55) 0 3px,
+    transparent 3px 9px
+  );
 }
 
 /* Tekstur cincin halus untuk kartu gelap */
 .rings {
   background-image:
-    repeating-radial-gradient(ellipse at 110% 130%, rgb(95 191 138 / 0.12) 0 2px, transparent 2px 18px),
+    repeating-radial-gradient(
+      ellipse at 110% 130%,
+      rgb(95 191 138 / 0.12) 0 2px,
+      transparent 2px 18px
+    ),
     radial-gradient(260px 200px at 100% 0%, rgb(225 187 76 / 0.22), transparent 70%),
     linear-gradient(160deg, #04140c, #103b26);
 }
@@ -63,14 +71,30 @@ html {
 .prose-news {
   @apply text-slate-700 leading-relaxed;
 }
-.prose-news h2 { @apply mt-8 mb-3 text-2xl font-bold text-brand-900; }
-.prose-news h3 { @apply mt-6 mb-2 text-xl font-semibold text-brand-900; }
-.prose-news p { @apply mb-4; }
-.prose-news ul { @apply mb-4 list-disc pl-6; }
-.prose-news ol { @apply mb-4 list-decimal pl-6; }
-.prose-news a { @apply text-brand-700 underline; }
-.prose-news img { @apply my-6 rounded-xl; }
-.prose-news blockquote { @apply my-6 border-l-4 border-gold-500 bg-brand-50 px-5 py-3 italic; }
+.prose-news h2 {
+  @apply mt-8 mb-3 text-2xl font-bold text-brand-900;
+}
+.prose-news h3 {
+  @apply mt-6 mb-2 text-xl font-semibold text-brand-900;
+}
+.prose-news p {
+  @apply mb-4;
+}
+.prose-news ul {
+  @apply mb-4 list-disc pl-6;
+}
+.prose-news ol {
+  @apply mb-4 list-decimal pl-6;
+}
+.prose-news a {
+  @apply text-brand-700 underline;
+}
+.prose-news img {
+  @apply my-6 rounded-xl;
+}
+.prose-news blockquote {
+  @apply my-6 border-l-4 border-gold-500 bg-brand-50 px-5 py-3 italic;
+}
 
 .input {
   @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-slate-800 outline-none transition focus:border-brand-600 focus:ring-2 focus:ring-brand-100;

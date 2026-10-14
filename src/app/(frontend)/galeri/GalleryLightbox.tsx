@@ -61,7 +61,10 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
 
   const current = index !== null ? photos[index] : null
   // Muat foto sebelum & sesudahnya lebih dulu supaya perpindahan terasa instan
-  const neighbors = index !== null && total > 1 ? [photos[(index + 1) % total], photos[(index - 1 + total) % total]] : []
+  const neighbors =
+    index !== null && total > 1
+      ? [photos[(index + 1) % total], photos[(index - 1 + total) % total]]
+      : []
 
   return (
     <>
@@ -85,7 +88,15 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
               />
               <span className="absolute inset-0 flex items-center justify-center bg-brand-950/0 transition group-hover:bg-brand-950/30">
                 <span className="flex h-12 w-12 scale-75 items-center justify-center rounded-full bg-white/90 text-brand-900 opacity-0 transition group-hover:scale-100 group-hover:opacity-100">
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <svg
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
                     <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                   </svg>
                 </span>
@@ -110,7 +121,10 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
           onTouchEnd={onTouchEnd}
         >
           {/* Baris atas: penghitung & tombol tutup */}
-          <div className="flex items-center justify-between px-4 py-3 sm:px-6" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="flex items-center justify-between px-4 py-3 sm:px-6"
+            onClick={(event) => event.stopPropagation()}
+          >
             <span className="rounded-full bg-white/10 px-3 py-1 text-sm font-semibold tabular-nums">
               {index! + 1} / {total}
             </span>
@@ -121,7 +135,15 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
               className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:outline-none"
               aria-label="Tutup"
             >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
@@ -148,7 +170,15 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
                   className="absolute left-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:outline-none sm:left-5"
                   aria-label="Foto sebelumnya"
                 >
-                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <svg
+                    className="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
                     <path d="m15 18-6-6 6-6" />
                   </svg>
                 </button>
@@ -161,7 +191,15 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
                   className="absolute right-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:outline-none sm:right-5"
                   aria-label="Foto berikutnya"
                 >
-                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <svg
+                    className="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
                     <path d="m9 18 6-6-6-6" />
                   </svg>
                 </button>
@@ -170,7 +208,10 @@ export function GalleryLightbox({ photos }: { photos: GalleryPhoto[] }) {
           </div>
 
           {/* Keterangan */}
-          <div className="px-4 pt-3 pb-6 text-center sm:px-6" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="px-4 pt-3 pb-6 text-center sm:px-6"
+            onClick={(event) => event.stopPropagation()}
+          >
             <p className="font-semibold">{current.title}</p>
             {current.caption && <p className="mt-1 text-sm text-brand-100/70">{current.caption}</p>}
             <p className="mt-1 text-xs text-brand-100/50">{current.date}</p>

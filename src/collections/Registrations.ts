@@ -21,7 +21,14 @@ export const Registrations: CollectionConfig = {
   labels: { singular: 'Pendaftar', plural: 'Pendaftar PSB' },
   admin: {
     useAsTitle: 'fullName',
-    defaultColumns: ['registrationNumber', 'fullName', 'level', 'parentPhone', 'status', 'createdAt'],
+    defaultColumns: [
+      'registrationNumber',
+      'fullName',
+      'level',
+      'parentPhone',
+      'status',
+      'createdAt',
+    ],
     listSearchableFields: ['fullName', 'registrationNumber', 'parentName', 'parentPhone'],
     group: 'PSB',
     hidden: ({ user }) => !hasRole({ user } as never, 'admin', 'admissions'),

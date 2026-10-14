@@ -37,26 +37,42 @@ export default async function AdmissionsPage() {
           <div className="card-bento flex flex-col justify-between gap-6 p-7 md:flex-row md:items-center lg:col-span-8">
             <div>
               <p className="text-sm text-slate-500">Status pendaftaran</p>
-              <p className={`mt-1 text-2xl font-bold tracking-tight ${admissions.isOpen ? 'text-brand-600' : 'text-slate-500'}`}>
-                {admissions.isOpen ? 'Pendaftaran sedang dibuka' : 'Pendaftaran belum dibuka / sudah ditutup'}
+              <p
+                className={`mt-1 text-2xl font-bold tracking-tight ${admissions.isOpen ? 'text-brand-600' : 'text-slate-500'}`}
+              >
+                {admissions.isOpen
+                  ? 'Pendaftaran sedang dibuka'
+                  : 'Pendaftaran belum dibuka / sudah ditutup'}
               </p>
-              <p className="mt-1 text-sm text-slate-500">Ada pertanyaan? Hubungi panitia lewat WhatsApp.</p>
+              <p className="mt-1 text-sm text-slate-500">
+                Ada pertanyaan? Hubungi panitia lewat WhatsApp.
+              </p>
             </div>
             <div className="flex flex-wrap gap-2.5">
               {admissions.isOpen && (
-                <a href="#formulir" className="rounded-full bg-gradient-to-br from-brand-700 to-brand-900 px-6 py-3 font-bold text-white transition hover:-translate-y-0.5">
+                <a
+                  href="#formulir"
+                  className="rounded-full bg-gradient-to-br from-brand-700 to-brand-900 px-6 py-3 font-bold text-white transition hover:-translate-y-0.5"
+                >
                   Isi Formulir
                 </a>
               )}
               {waUrl && (
-                <a href={waUrl} target="_blank" rel="noopener" className="rounded-full border-[1.5px] border-brand-800 px-6 py-3 font-bold text-brand-800 transition hover:bg-brand-50">
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="rounded-full border-[1.5px] border-brand-800 px-6 py-3 font-bold text-brand-800 transition hover:bg-brand-50"
+                >
                   Tanya Panitia
                 </a>
               )}
             </div>
           </div>
           <div className="rings flex flex-col justify-between rounded-[28px] p-7 text-white lg:col-span-4">
-            <p className="text-sm text-brand-100/70">{admissions.closesAt ? 'Pendaftaran ditutup dalam' : 'Tahun ajaran'}</p>
+            <p className="text-sm text-brand-100/70">
+              {admissions.closesAt ? 'Pendaftaran ditutup dalam' : 'Tahun ajaran'}
+            </p>
             {admissions.closesAt ? (
               <>
                 <Countdown
@@ -65,12 +81,12 @@ export default async function AdmissionsPage() {
                   daysClassName="mr-2 text-gold-300"
                   doneClassName="mt-3 text-xl font-bold text-gold-300"
                 />
-                <p className="mt-2 text-xs text-brand-100/60">
-                  {formatDate(admissions.closesAt)}
-                </p>
+                <p className="mt-2 text-xs text-brand-100/60">{formatDate(admissions.closesAt)}</p>
               </>
             ) : (
-              <p className="mt-3 text-4xl font-bold tracking-tight text-gold-300">{admissions.academicYear}</p>
+              <p className="mt-3 text-4xl font-bold tracking-tight text-gold-300">
+                {admissions.academicYear}
+              </p>
             )}
           </div>
         </section>
@@ -78,17 +94,26 @@ export default async function AdmissionsPage() {
         {/* Alur pendaftaran */}
         {admissions.steps && admissions.steps.length > 0 && (
           <section className="pt-10">
-            <p className="text-sm font-semibold tracking-[0.15em] text-gold-600 uppercase">Langkah demi langkah</p>
-            <h2 className="mt-1 mb-6 text-3xl font-bold tracking-tight text-brand-950">Alur Pendaftaran</h2>
+            <p className="text-sm font-semibold tracking-[0.15em] text-gold-600 uppercase">
+              Langkah demi langkah
+            </p>
+            <h2 className="mt-1 mb-6 text-3xl font-bold tracking-tight text-brand-950">
+              Alur Pendaftaran
+            </h2>
             <ol className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
               {admissions.steps.map((step, i) => (
-                <li key={step.id ?? i} className={`flex flex-col rounded-[24px] p-5 ${i === 0 ? 'bg-gradient-to-br from-brand-700 to-brand-950 text-white' : 'card-bento'}`}>
+                <li
+                  key={step.id ?? i}
+                  className={`flex flex-col rounded-[24px] p-5 ${i === 0 ? 'bg-gradient-to-br from-brand-700 to-brand-950 text-white' : 'card-bento'}`}
+                >
                   <span
                     className={`flex h-10 w-10 items-center justify-center rounded-full font-bold ${i === 0 ? 'bg-gold-400 text-brand-950' : 'bg-brand-50 text-brand-700'}`}
                   >
                     {i + 1}
                   </span>
-                  <p className={`mt-8 font-bold ${i === 0 ? 'text-white' : 'text-brand-950'}`}>{step.text}</p>
+                  <p className={`mt-8 font-bold ${i === 0 ? 'text-white' : 'text-brand-950'}`}>
+                    {step.text}
+                  </p>
                 </li>
               ))}
             </ol>
@@ -102,7 +127,9 @@ export default async function AdmissionsPage() {
             <ul className="mt-5 space-y-3 text-slate-700">
               {admissions.requirements?.map((requirement, i) => (
                 <li key={requirement.id ?? i} className="flex gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600 text-[11px] font-bold text-white">✓</span>
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600 text-[11px] font-bold text-white">
+                    ✓
+                  </span>
                   {requirement.text}
                 </li>
               ))}
@@ -126,7 +153,9 @@ export default async function AdmissionsPage() {
                 {admissions.fees?.map((fee, i) => (
                   <tr key={fee.id ?? i} className="border-b border-slate-100 last:border-0">
                     <td className="py-3 pr-2 text-slate-600">{fee.item}</td>
-                    <td className="py-3 text-right font-bold whitespace-nowrap text-brand-950">{fee.amount}</td>
+                    <td className="py-3 text-right font-bold whitespace-nowrap text-brand-950">
+                      {fee.amount}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -139,11 +168,13 @@ export default async function AdmissionsPage() {
           <section id="formulir" className="scroll-mt-28 pt-10">
             <div className="grid gap-3.5 lg:grid-cols-12">
               <div className="rings flex flex-col rounded-[28px] p-8 text-white lg:col-span-4">
-                <p className="text-sm font-semibold tracking-[0.15em] text-gold-400 uppercase">Daftar online</p>
+                <p className="text-sm font-semibold tracking-[0.15em] text-gold-400 uppercase">
+                  Daftar online
+                </p>
                 <h2 className="mt-2 text-3xl font-bold tracking-tight">Formulir Pendaftaran</h2>
                 <p className="mt-4 text-sm leading-relaxed text-brand-100/75">
-                  Isi data dengan benar. Kolom bertanda * wajib diisi. Setelah terkirim, Anda akan mendapat nomor pendaftaran dan panitia
-                  akan menghubungi lewat WhatsApp.
+                  Isi data dengan benar. Kolom bertanda * wajib diisi. Setelah terkirim, Anda akan
+                  mendapat nomor pendaftaran dan panitia akan menghubungi lewat WhatsApp.
                 </p>
               </div>
               <div className="card-bento p-6 md:p-10 lg:col-span-8">

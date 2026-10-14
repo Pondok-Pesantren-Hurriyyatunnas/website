@@ -26,7 +26,13 @@ type Props = {
 }
 
 // Hitung mundur ke suatu waktu (dipakai di dashboard & website untuk penutupan PSB)
-export function Countdown({ target, className, daysClassName, doneClassName, doneText = 'Pendaftaran telah ditutup' }: Props) {
+export function Countdown({
+  target,
+  className,
+  daysClassName,
+  doneClassName,
+  doneText = 'Pendaftaran telah ditutup',
+}: Props) {
   const now = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   if (now === null) return <div className={className}>--:--:--</div>

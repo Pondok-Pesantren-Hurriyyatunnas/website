@@ -59,12 +59,20 @@ export default async function NewsDetailPage({ params }: Props) {
           ← Kembali ke berita
         </Link>
         <div className="mt-6 flex items-center gap-2 text-sm">
-          <span className="rounded-full bg-brand-50 px-3 py-1 font-semibold text-brand-700">{categoryLabels[post.category]}</span>
+          <span className="rounded-full bg-brand-50 px-3 py-1 font-semibold text-brand-700">
+            {categoryLabels[post.category]}
+          </span>
           <span className="text-slate-500">{formatDate(post.publishedAt)}</span>
         </div>
-        <h1 className="mt-4 text-3xl leading-tight font-extrabold text-brand-950 md:text-4xl">{post.title}</h1>
+        <h1 className="mt-4 text-3xl leading-tight font-extrabold text-brand-950 md:text-4xl">
+          {post.title}
+        </h1>
         {thumbnail && (
-          <img src={thumbnail} alt={getMedia(post.thumbnail)?.alt ?? post.title} className="mt-8 w-full rounded-[24px]" />
+          <img
+            src={thumbnail}
+            alt={getMedia(post.thumbnail)?.alt ?? post.title}
+            className="mt-8 w-full rounded-[24px]"
+          />
         )}
         <div className="mt-8">
           <RichText data={post.content} />

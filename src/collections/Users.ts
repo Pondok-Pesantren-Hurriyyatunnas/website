@@ -6,7 +6,13 @@ import { hasRole, isAdmin, isAdminField, isAdminOrSelf } from '../access'
 const makeFirstUserAdmin: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
   if (operation !== 'create') return data
   // Pakai `find`, bukan `count`: count tanpa filter tidak didukung di dalam transaction MongoDB (Atlas)
-  const { docs } = await req.payload.find({ collection: 'users', limit: 1, depth: 0, pagination: false, req })
+  const { docs } = await req.payload.find({
+    collection: 'users',
+    limit: 1,
+    depth: 0,
+    pagination: false,
+    req,
+  })
   if (docs.length === 0) data.role = 'admin'
   return data
 }

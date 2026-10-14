@@ -26,7 +26,9 @@ export const getAdmissions = cache(async () =>
 )
 
 export const getPublishedNews = cache(async (limit = 100) => {
-  const { docs } = await (await getPayloadClient()).find({
+  const { docs } = await (
+    await getPayloadClient()
+  ).find({
     collection: 'news',
     where: { _status: { equals: 'published' } },
     sort: '-publishedAt',
@@ -37,7 +39,9 @@ export const getPublishedNews = cache(async (limit = 100) => {
 })
 
 export const getNewsBySlug = cache(async (slug: string) => {
-  const { docs } = await (await getPayloadClient()).find({
+  const { docs } = await (
+    await getPayloadClient()
+  ).find({
     collection: 'news',
     where: { slug: { equals: slug }, _status: { equals: 'published' } },
     limit: 1,
@@ -47,7 +51,9 @@ export const getNewsBySlug = cache(async (slug: string) => {
 })
 
 export const getGallery = cache(async () => {
-  const { docs } = await (await getPayloadClient()).find({
+  const { docs } = await (
+    await getPayloadClient()
+  ).find({
     collection: 'gallery',
     sort: '-date',
     limit: 200,

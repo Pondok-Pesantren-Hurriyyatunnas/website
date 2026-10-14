@@ -166,7 +166,9 @@ body,
   font-weight: 500;
   color: var(--theme-elevation-500);
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 
   // Ikon menu (pakai mask supaya ikut warna teks)
   &::before {
@@ -280,7 +282,11 @@ div.nav__link {
   background-color: var(--ponpes-green-950);
   background-image:
     radial-gradient(120px 120px at 100% 0%, rgb(225 187 76 / 0.25), transparent 70%),
-    repeating-radial-gradient(circle at 110% 120%, rgb(255 255 255 / 0.05) 0 2px, transparent 2px 14px),
+    repeating-radial-gradient(
+      circle at 110% 120%,
+      rgb(255 255 255 / 0.05) 0 2px,
+      transparent 2px 14px
+    ),
     linear-gradient(160deg, var(--ponpes-green-950), var(--ponpes-green-800));
 
   &__title {
@@ -391,7 +397,9 @@ html[data-theme='dark'] .btn--style-primary {
   border: 0;
   background: var(--theme-elevation-0);
   box-shadow: 0 1px 2px rgb(16 24 19 / 0.04);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -500,7 +508,10 @@ html[data-theme='dark'] .btn--style-primary {
     text-decoration: none;
     color: var(--ponpes-green-800);
     background: transparent;
-    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
 
     &:hover {
       background: var(--theme-success-50);
@@ -539,14 +550,30 @@ html[data-theme='dark'] .btn--style-primary {
       flex: 1;
     }
 
-    &--stat { grid-column: span 3; }
-    &--chart { grid-column: span 6; }
-    &--psb { grid-column: span 3; }
-    &--news { grid-column: span 3; }
-    &--news-wide { grid-column: span 12; }
-    &--recent { grid-column: span 5; }
-    &--gauge { grid-column: span 4; }
-    &--countdown { grid-column: span 3; }
+    &--stat {
+      grid-column: span 3;
+    }
+    &--chart {
+      grid-column: span 6;
+    }
+    &--psb {
+      grid-column: span 3;
+    }
+    &--news {
+      grid-column: span 3;
+    }
+    &--news-wide {
+      grid-column: span 12;
+    }
+    &--recent {
+      grid-column: span 5;
+    }
+    &--gauge {
+      grid-column: span 4;
+    }
+    &--countdown {
+      grid-column: span 3;
+    }
   }
 
   &__card {
@@ -600,7 +627,9 @@ html[data-theme='dark'] .btn--style-primary {
   // Kartu statistik
   &__stat {
     min-height: 168px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
 
     &:hover {
       transform: translateY(-2px);
@@ -713,9 +742,15 @@ html[data-theme='dark'] .btn--style-primary {
     border-radius: 999px;
     transition: height 0.4s ease;
 
-    &--dark { background: var(--ponpes-green-900); }
-    &--mid { background: #23854f; }
-    &--light { background: #5fbf8a; }
+    &--dark {
+      background: var(--ponpes-green-900);
+    }
+    &--mid {
+      background: #23854f;
+    }
+    &--light {
+      background: #5fbf8a;
+    }
 
     &--empty {
       background: repeating-linear-gradient(135deg, #9fb3a6 0 3px, transparent 3px 8px);
@@ -855,10 +890,22 @@ html[data-theme='dark'] .btn--style-primary {
     font-weight: 600;
     white-space: nowrap;
 
-    &--new { color: var(--theme-warning-600); background: var(--theme-warning-50); }
-    &--verified { color: var(--theme-success-550); background: var(--theme-success-50); }
-    &--accepted { color: var(--ponpes-green-800); background: var(--theme-success-100); }
-    &--rejected { color: var(--theme-error-550); background: var(--theme-error-50); }
+    &--new {
+      color: var(--theme-warning-600);
+      background: var(--theme-warning-50);
+    }
+    &--verified {
+      color: var(--theme-success-550);
+      background: var(--theme-success-50);
+    }
+    &--accepted {
+      color: var(--ponpes-green-800);
+      background: var(--theme-success-100);
+    }
+    &--rejected {
+      color: var(--theme-error-550);
+      background: var(--theme-error-50);
+    }
   }
 
   // Gauge progres seleksi
@@ -933,7 +980,11 @@ html[data-theme='dark'] .btn--style-primary {
     color: #fff;
     background-color: var(--ponpes-green-950);
     background-image:
-      repeating-radial-gradient(ellipse at 110% 130%, rgb(95 191 138 / 0.12) 0 2px, transparent 2px 16px),
+      repeating-radial-gradient(
+        ellipse at 110% 130%,
+        rgb(95 191 138 / 0.12) 0 2px,
+        transparent 2px 16px
+      ),
       radial-gradient(200px 160px at 100% 0%, rgb(225 187 76 / 0.2), transparent 70%),
       linear-gradient(160deg, #04140c, var(--ponpes-green-900));
 
@@ -997,9 +1048,15 @@ html[data-theme='dark'] .ponpes-bento {
     }
   }
 
-  .ponpes-bento__bar--dark { background: #8fd6ad; }
-  .ponpes-bento__bar--mid { background: #2f9e5f; }
-  .ponpes-bento__bar--light { background: #1f6b44; }
+  .ponpes-bento__bar--dark {
+    background: #8fd6ad;
+  }
+  .ponpes-bento__bar--mid {
+    background: #2f9e5f;
+  }
+  .ponpes-bento__bar--light {
+    background: #1f6b44;
+  }
 
   .ponpes-bento__bar-tip {
     color: var(--ponpes-gold-300);
@@ -1020,14 +1077,31 @@ html[data-theme='dark'] .ponpes-bento {
   }
 
   .ponpes-bento__cell {
-    &--stat { grid-column: span 3; }
-    &--chart { grid-column: span 6; }
-    &--psb { grid-column: span 3; }
-    &--news { grid-column: span 3; grid-row: auto; }
-    &--news-wide { grid-column: span 6; }
-    &--recent { grid-column: span 6; }
-    &--gauge { grid-column: span 3; }
-    &--countdown { grid-column: span 3; }
+    &--stat {
+      grid-column: span 3;
+    }
+    &--chart {
+      grid-column: span 6;
+    }
+    &--psb {
+      grid-column: span 3;
+    }
+    &--news {
+      grid-column: span 3;
+      grid-row: auto;
+    }
+    &--news-wide {
+      grid-column: span 6;
+    }
+    &--recent {
+      grid-column: span 6;
+    }
+    &--gauge {
+      grid-column: span 3;
+    }
+    &--countdown {
+      grid-column: span 3;
+    }
   }
 }
 
@@ -1047,7 +1121,9 @@ html[data-theme='dark'] .ponpes-bento {
     grid-column: span 2 !important;
     grid-row: auto !important;
 
-    &--stat { grid-column: span 1 !important; }
+    &--stat {
+      grid-column: span 1 !important;
+    }
   }
 
   .ponpes-bento__stat {

@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | "Pacific/Midway"
-  | "Pacific/Niue"
-  | "Pacific/Honolulu"
-  | "Pacific/Rarotonga"
-  | "America/Anchorage"
-  | "Pacific/Gambier"
-  | "America/Los_Angeles"
-  | "America/Tijuana"
-  | "America/Denver"
-  | "America/Phoenix"
-  | "America/Chicago"
-  | "America/Guatemala"
-  | "America/New_York"
-  | "America/Bogota"
-  | "America/Caracas"
-  | "America/Santiago"
-  | "America/Buenos_Aires"
-  | "America/Sao_Paulo"
-  | "Atlantic/South_Georgia"
-  | "Atlantic/Azores"
-  | "Atlantic/Cape_Verde"
-  | "Europe/London"
-  | "Europe/Berlin"
-  | "Africa/Lagos"
-  | "Europe/Athens"
-  | "Africa/Cairo"
-  | "Europe/Moscow"
-  | "Asia/Riyadh"
-  | "Asia/Dubai"
-  | "Asia/Baku"
-  | "Asia/Karachi"
-  | "Asia/Tashkent"
-  | "Asia/Calcutta"
-  | "Asia/Dhaka"
-  | "Asia/Almaty"
-  | "Asia/Jakarta"
-  | "Asia/Bangkok"
-  | "Asia/Shanghai"
-  | "Asia/Singapore"
-  | "Asia/Tokyo"
-  | "Asia/Seoul"
-  | "Australia/Brisbane"
-  | "Australia/Sydney"
-  | "Pacific/Guam"
-  | "Pacific/Noumea"
-  | "Pacific/Auckland"
-  | "Pacific/Fiji";
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
@@ -74,11 +74,11 @@ export interface Config {
     users: User;
     exports: Export;
     imports: Import;
-    "payload-kv": PayloadKv;
-    "payload-jobs": PayloadJob;
-    "payload-locked-documents": PayloadLockedDocument;
-    "payload-preferences": PayloadPreference;
-    "payload-migrations": PayloadMigration;
+    'payload-kv': PayloadKv;
+    'payload-jobs': PayloadJob;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
@@ -89,31 +89,28 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     exports: ExportsSelect<false> | ExportsSelect<true>;
     imports: ImportsSelect<false> | ImportsSelect<true>;
-    "payload-kv": PayloadKvSelect<false> | PayloadKvSelect<true>;
-    "payload-jobs": PayloadJobsSelect<false> | PayloadJobsSelect<true>;
-    "payload-locked-documents":
-      PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    "payload-preferences":
-      PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    "payload-migrations":
-      PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: string;
   };
   fallbackLocale: null;
   globals: {
-    "home-page": HomePage;
-    "profile-page": ProfilePage;
-    "program-page": ProgramPage;
-    "site-settings": SiteSetting;
+    'home-page': HomePage;
+    'profile-page': ProfilePage;
+    'program-page': ProgramPage;
+    'site-settings': SiteSetting;
     admissions: Admission;
   };
   globalsSelect: {
-    "home-page": HomePageSelect<false> | HomePageSelect<true>;
-    "profile-page": ProfilePageSelect<false> | ProfilePageSelect<true>;
-    "program-page": ProgramPageSelect<false> | ProgramPageSelect<true>;
-    "site-settings": SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'profile-page': ProfilePageSelect<false> | ProfilePageSelect<true>;
+    'program-page': ProgramPageSelect<false> | ProgramPageSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
   };
   locale: null;
@@ -163,7 +160,7 @@ export interface News {
    */
   slug?: string | null;
   publishedAt: string;
-  category: "activity" | "announcement" | "achievement" | "study" | "article";
+  category: 'activity' | 'announcement' | 'achievement' | 'study' | 'article';
   thumbnail?: (string | null) | Media;
   /**
    * Satu-dua kalimat yang tampil di daftar berita.
@@ -177,8 +174,8 @@ export interface News {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -186,7 +183,7 @@ export interface News {
   };
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -258,10 +255,10 @@ export interface Gallery {
 export interface Registration {
   id: string;
   registrationNumber?: string | null;
-  status: "new" | "verified" | "accepted" | "rejected";
+  status: 'new' | 'verified' | 'accepted' | 'rejected';
   academicYear?: string | null;
   fullName: string;
-  gender: "male" | "female";
+  gender: 'male' | 'female';
   level: string;
   birthPlace: string;
   birthDate: string;
@@ -284,7 +281,7 @@ export interface Registration {
 export interface User {
   id: string;
   name: string;
-  role: "admin" | "editor" | "admissions";
+  role: 'admin' | 'editor' | 'admissions';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -303,7 +300,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-  collection: "users";
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -312,13 +309,13 @@ export interface User {
 export interface Export {
   id: string;
   name?: string | null;
-  format: "csv" | "json";
+  format: 'csv' | 'json';
   limit?: number | null;
   page?: number | null;
   sort?: string | null;
-  sortOrder?: ("asc" | "desc") | null;
-  drafts?: ("yes" | "no") | null;
-  selectionToUse?: ("currentSelection" | "currentFilters" | "all") | null;
+  sortOrder?: ('asc' | 'desc') | null;
+  drafts?: ('yes' | 'no') | null;
+  selectionToUse?: ('currentSelection' | 'currentFilters' | 'all') | null;
   fields?: string[] | null;
   collectionSlug: string;
   where?:
@@ -349,9 +346,9 @@ export interface Export {
 export interface Import {
   id: string;
   collectionSlug: string;
-  importMode?: ("create" | "update" | "upsert") | null;
+  importMode?: ('create' | 'update' | 'upsert') | null;
   matchField?: string | null;
-  status?: ("pending" | "completed" | "partial" | "failed") | null;
+  status?: ('pending' | 'completed' | 'partial' | 'failed') | null;
   summary?: {
     imported?: number | null;
     updated?: number | null;
@@ -448,8 +445,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug:
-          "inline" | "createCollectionExport" | "createCollectionImport";
+        taskSlug: 'inline' | 'createCollectionExport' | 'createCollectionImport';
         taskID: string;
         input?:
           | {
@@ -469,7 +465,7 @@ export interface PayloadJob {
           | number
           | boolean
           | null;
-        state: "failed" | "succeeded";
+        state: 'failed' | 'succeeded';
         error?:
           | {
               [k: string]: unknown;
@@ -482,8 +478,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?:
-    ("inline" | "createCollectionExport" | "createCollectionImport") | null;
+  taskSlug?: ('inline' | 'createCollectionExport' | 'createCollectionImport') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -498,28 +493,28 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: "news";
+        relationTo: 'news';
         value: string | News;
       } | null)
     | ({
-        relationTo: "gallery";
+        relationTo: 'gallery';
         value: string | Gallery;
       } | null)
     | ({
-        relationTo: "media";
+        relationTo: 'media';
         value: string | Media;
       } | null)
     | ({
-        relationTo: "registrations";
+        relationTo: 'registrations';
         value: string | Registration;
       } | null)
     | ({
-        relationTo: "users";
+        relationTo: 'users';
         value: string | User;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: string | User;
   };
   updatedAt: string;
@@ -532,7 +527,7 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: string;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: string | User;
   };
   key?: string | null;
@@ -870,8 +865,8 @@ export interface ProfilePage {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -1173,7 +1168,7 @@ export interface CollectionsWidget {
   data?: {
     [k: string]: unknown;
   };
-  width: "full";
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1184,18 +1179,11 @@ export interface TaskCreateCollectionExport {
     id: string;
     name: string;
     batchSize?: number | null;
-    collectionSlug:
-      | "news"
-      | "gallery"
-      | "media"
-      | "registrations"
-      | "users"
-      | "exports"
-      | "imports";
-    drafts?: ("yes" | "no") | null;
+    collectionSlug: 'news' | 'gallery' | 'media' | 'registrations' | 'users' | 'exports' | 'imports';
+    drafts?: ('yes' | 'no') | null;
     exportCollection: string;
     fields?: string[] | null;
-    format: "csv" | "json";
+    format: 'csv' | 'json';
     limit?: number | null;
     locale?: string | null;
     maxLimit?: number | null;
@@ -1227,7 +1215,7 @@ export interface TaskCreateCollectionImport {
     userCollection?: string | null;
     batchSize?: number | null;
     debug?: boolean | null;
-    defaultVersionStatus?: ("draft" | "published") | null;
+    defaultVersionStatus?: ('draft' | 'published') | null;
     maxLimit?: number | null;
   };
   output?: unknown;
@@ -1240,6 +1228,7 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-declare module "payload" {
+
+declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }
