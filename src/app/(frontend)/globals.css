@@ -3,7 +3,7 @@
 @theme {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-arabic: var(--font-amiri), serif;
-  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
 
   --color-brand-50: #effaf3;
   --color-brand-100: #d8f3e1;
