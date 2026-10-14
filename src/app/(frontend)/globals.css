@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-amiri), serif;
+
+  --color-brand-50: #effaf3;
+  --color-brand-100: #d8f3e1;
+  --color-brand-200: #b3e5c6;
+  --color-brand-500: #2f9e5f;
+  --color-brand-600: #1f7f4a;
+  --color-brand-700: #19653d;
+  --color-brand-800: #165133;
+  --color-brand-900: #103b26;
+  --color-brand-950: #082316;
+
+  --color-gold-300: #ecd27f;
+  --color-gold-400: #e1bb4c;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a6821c;
+
+  /* Latar gading, senada dengan dashboard admin */
+  --color-paper: #f1f2ec;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Kartu dasar gaya bento */
+.card-bento {
+  @apply rounded-[28px] bg-white shadow-[0_1px_2px_rgb(16_24_19/0.04)];
+}
+
+/* Garis-garis miring untuk aksen (seperti batang kosong di dashboard) */
+.stripes {
+  background-image: repeating-linear-gradient(135deg, rgb(159 179 166 / 0.55) 0 3px, transparent 3px 9px);
+}
+
+/* Tekstur cincin halus untuk kartu gelap */
+.rings {
+  background-image:
+    repeating-radial-gradient(ellipse at 110% 130%, rgb(95 191 138 / 0.12) 0 2px, transparent 2px 18px),
+    radial-gradient(260px 200px at 100% 0%, rgb(225 187 76 / 0.22), transparent 70%),
+    linear-gradient(160deg, #04140c, #103b26);
+}
+
+/* Motif geometris + gradien hijau dalam satu background-image.
+   (Jangan gabungkan .pattern dengan bg-gradient-*: keduanya memakai background-image dan saling menimpa.) */
+.pattern-green {
+  background-color: #103b26;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l8.8 21.2L60 30l-21.2 8.8L30 60l-8.8-21.2L0 30l21.2-8.8z' fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='1.2'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, #19653d 0%, #103b26 55%, #082316 100%);
+}
+
+/* Motif geometris islami untuk latar hero */
+.pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l8.8 21.2L60 30l-21.2 8.8L30 60l-8.8-21.2L0 30l21.2-8.8z' fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+/* Tipografi isi rich text (berita, sejarah) */
+.prose-news {
+  @apply text-slate-700 leading-relaxed;
+}
+.prose-news h2 { @apply mt-8 mb-3 text-2xl font-bold text-brand-900; }
+.prose-news h3 { @apply mt-6 mb-2 text-xl font-semibold text-brand-900; }
+.prose-news p { @apply mb-4; }
+.prose-news ul { @apply mb-4 list-disc pl-6; }
+.prose-news ol { @apply mb-4 list-decimal pl-6; }
+.prose-news a { @apply text-brand-700 underline; }
+.prose-news img { @apply my-6 rounded-xl; }
+.prose-news blockquote { @apply my-6 border-l-4 border-gold-500 bg-brand-50 px-5 py-3 italic; }
+
+.input {
+  @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-slate-800 outline-none transition focus:border-brand-600 focus:ring-2 focus:ring-brand-100;
+}

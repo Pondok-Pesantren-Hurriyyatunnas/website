@@ -1,0 +1,1075 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+// =============================================================================
+// Tema dashboard admin PP Hurriyyatunnas: hijau zamrud + emas, latar gading.
+// Payload membalik skala "base" otomatis untuk mode gelap, jadi satu skala cukup.
+// Aturan di sini tidak ber-@layer, sehingga menang atas gaya bawaan Payload.
+// =============================================================================
+
+:root {
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic: 'Amiri', serif;
+  --style-radius-s: 8px;
+  --style-radius-m: 12px;
+  --style-radius-l: 18px;
+
+  // Netral bernuansa hijau-gading
+  --color-base-0: rgb(255, 255, 255);
+  --color-base-50: rgb(247, 247, 242);
+  --color-base-100: rgb(237, 239, 232);
+  --color-base-150: rgb(223, 227, 218);
+  --color-base-200: rgb(206, 212, 201);
+  --color-base-250: rgb(189, 197, 184);
+  --color-base-300: rgb(169, 179, 166);
+  --color-base-350: rgb(151, 162, 148);
+  --color-base-400: rgb(132, 144, 130);
+  --color-base-450: rgb(115, 127, 113);
+  --color-base-500: rgb(99, 111, 98);
+  --color-base-550: rgb(85, 97, 85);
+  --color-base-600: rgb(72, 84, 72);
+  --color-base-650: rgb(61, 72, 61);
+  --color-base-700: rgb(51, 61, 52);
+  --color-base-750: rgb(41, 51, 43);
+  --color-base-800: rgb(32, 42, 35);
+  --color-base-850: rgb(23, 32, 26);
+  --color-base-900: rgb(16, 24, 19);
+  --color-base-950: rgb(10, 16, 12);
+  --color-base-1000: rgb(4, 8, 6);
+
+  // "success" = hijau brand (dipakai Payload untuk tombol & status sukses)
+  --color-success-50: rgb(239, 250, 243);
+  --color-success-100: rgb(216, 243, 225);
+  --color-success-150: rgb(194, 234, 207);
+  --color-success-200: rgb(179, 229, 198);
+  --color-success-250: rgb(150, 214, 175);
+  --color-success-300: rgb(120, 199, 152);
+  --color-success-350: rgb(93, 184, 131);
+  --color-success-400: rgb(68, 168, 112);
+  --color-success-450: rgb(47, 158, 95);
+  --color-success-500: rgb(38, 140, 82);
+  --color-success-550: rgb(31, 127, 74);
+  --color-success-600: rgb(25, 112, 64);
+  --color-success-650: rgb(25, 101, 61);
+  --color-success-700: rgb(22, 88, 54);
+  --color-success-750: rgb(22, 81, 51);
+  --color-success-800: rgb(19, 70, 44);
+  --color-success-850: rgb(16, 59, 38);
+  --color-success-900: rgb(13, 47, 31);
+  --color-success-950: rgb(8, 35, 22);
+
+  // "warning" = emas
+  --color-warning-50: rgb(252, 248, 235);
+  --color-warning-100: rgb(248, 239, 205);
+  --color-warning-150: rgb(243, 228, 172);
+  --color-warning-200: rgb(238, 216, 140);
+  --color-warning-250: rgb(236, 210, 127);
+  --color-warning-300: rgb(230, 197, 98);
+  --color-warning-350: rgb(225, 187, 76);
+  --color-warning-400: rgb(214, 173, 52);
+  --color-warning-450: rgb(201, 162, 39);
+  --color-warning-500: rgb(184, 146, 33);
+  --color-warning-550: rgb(166, 130, 28);
+  --color-warning-600: rgb(145, 113, 25);
+  --color-warning-650: rgb(125, 97, 23);
+  --color-warning-700: rgb(107, 83, 22);
+  --color-warning-750: rgb(92, 72, 21);
+  --color-warning-800: rgb(78, 61, 20);
+  --color-warning-850: rgb(63, 50, 19);
+  --color-warning-900: rgb(48, 39, 17);
+  --color-warning-950: rgb(34, 28, 14);
+
+  // Warna tetap untuk komponen kustom (tidak ikut dibalik di mode gelap)
+  --ponpes-green-950: #082316;
+  --ponpes-green-900: #103b26;
+  --ponpes-green-800: #165133;
+  --ponpes-green-700: #19653d;
+  --ponpes-gold-300: #ecd27f;
+  --ponpes-gold-400: #e1bb4c;
+  --ponpes-gold-500: #c9a227;
+  --ponpes-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l8.8 21.2L60 30l-21.2 8.8L30 60l-8.8-21.2L0 30l21.2-8.8z' fill='none' stroke='%23ffffff' stroke-opacity='.08' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+// =============================================================================
+// Kerangka dashboard (terinspirasi "Donezo"): latar abu-gading, sidebar & header
+// berbentuk panel membulat, kartu putih. Hanya menata elemen bawaan Payload lewat
+// CSS — struktur HTML Payload tidak diubah.
+// =============================================================================
+
+:root {
+  --ponpes-gap: 14px;
+  --ponpes-card-radius: 22px;
+}
+
+html[data-theme='light'] {
+  --ponpes-page: rgb(238, 240, 234);
+}
+
+html[data-theme='dark'] {
+  --ponpes-page: rgb(7, 12, 9);
+}
+
+body,
+.template-default {
+  background: var(--ponpes-page);
+}
+
+// Payload memberi latar putih pada pembungkus konten; dibuat transparan agar kartu putih "mengambang"
+.template-default__wrap {
+  background: transparent;
+}
+
+// --- Sidebar ------------------------------------------------------------------
+.nav {
+  background: transparent;
+  border-right: 0;
+}
+
+.nav__scroll {
+  margin: var(--ponpes-gap) 0 var(--ponpes-gap) var(--ponpes-gap);
+  height: calc(100% - var(--ponpes-gap) * 2);
+  border-radius: var(--ponpes-card-radius);
+  background: var(--theme-elevation-0);
+  box-shadow: 0 1px 2px rgb(16 24 19 / 0.04);
+}
+
+.nav__wrap {
+  padding-top: calc(var(--base) * 1.25);
+}
+
+.nav-group {
+  margin-bottom: calc(var(--base) * 0.9);
+}
+
+.nav-group__toggle {
+  margin-bottom: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-400);
+}
+
+.nav-group__indicator {
+  opacity: 0.5;
+}
+
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px 12px;
+  margin: 2px 0;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--theme-elevation-500);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  // Ikon menu (pakai mask supaya ikut warna teks)
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 19px;
+    height: 19px;
+    background: currentColor;
+    -webkit-mask: var(--ponpes-nav-icon, var(--ponpes-icon-dot)) center / contain no-repeat;
+    mask: var(--ponpes-nav-icon, var(--ponpes-icon-dot)) center / contain no-repeat;
+  }
+
+  &:hover {
+    background: var(--theme-elevation-50);
+    color: var(--theme-text);
+  }
+}
+
+// Menu aktif: Payload merender div (tanpa href) + indikator
+div.nav__link {
+  background: transparent;
+  color: var(--theme-text);
+  font-weight: 700;
+
+  &::before {
+    background: var(--theme-success-500);
+  }
+}
+
+.nav__link-indicator {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: calc(var(--base) * -1);
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  background: var(--theme-success-500);
+}
+
+// Ikon per menu (garis tipis gaya Lucide)
+:root {
+  --ponpes-icon-dot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='4'/%3E%3C/svg%3E");
+}
+
+#nav-news {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2'/%3E%3Cpath d='M18 14h-8M15 18h-5M10 6h8v4h-8z'/%3E%3C/svg%3E");
+}
+#nav-gallery {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='3'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21'/%3E%3C/svg%3E");
+}
+#nav-media {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3C/svg%3E");
+}
+#nav-registrations {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
+}
+#nav-users {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/%3E%3C/svg%3E");
+}
+[id='nav-global-admissions'] {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01'/%3E%3C/svg%3E");
+}
+[id='nav-global-home-page'] {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
+}
+[id='nav-global-profile-page'] {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+}
+[id='nav-global-program-page'] {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0zM22 10v6M6 12.5V16a6 3 0 0 0 12 0v-3.5'/%3E%3C/svg%3E");
+}
+[id='nav-global-site-settings'] {
+  --ponpes-nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+}
+
+// Logo & nama pondok di atas menu
+.ponpes-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: calc(var(--base) * 1.25);
+  text-decoration: none;
+  color: var(--theme-text);
+
+  span {
+    display: grid;
+    line-height: 1.15;
+  }
+
+  strong {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  small {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ponpes-gold-500);
+  }
+}
+
+// Kartu promo "Website Pondok" di bawah menu (gaya kartu gelap Donezo)
+.ponpes-nav-card {
+  position: relative;
+  overflow: hidden;
+  margin-top: calc(var(--base) * 0.75);
+  padding: 18px;
+  border-radius: 18px;
+  color: #fff;
+  background-color: var(--ponpes-green-950);
+  background-image:
+    radial-gradient(120px 120px at 100% 0%, rgb(225 187 76 / 0.25), transparent 70%),
+    repeating-radial-gradient(circle at 110% 120%, rgb(255 255 255 / 0.05) 0 2px, transparent 2px 14px),
+    linear-gradient(160deg, var(--ponpes-green-950), var(--ponpes-green-800));
+
+  &__title {
+    margin: 12px 0 2px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__text {
+    margin: 0 0 14px;
+    font-size: 0.75rem;
+    color: rgb(216 243 225 / 0.75);
+  }
+
+  &__btn {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 999px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: var(--ponpes-green-700);
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: var(--ponpes-green-800);
+      color: #fff;
+    }
+  }
+}
+
+// --- Header atas: panel putih membulat ---------------------------------------
+.app-header__bg {
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.app-header__content {
+  padding-top: var(--ponpes-gap);
+}
+
+.app-header__wrapper {
+  padding: 8px 10px 8px 16px;
+  border-radius: 18px;
+  background: var(--theme-elevation-0);
+  box-shadow: 0 1px 2px rgb(16 24 19 / 0.04);
+}
+
+.app-header__account {
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--theme-success-100);
+}
+
+// Wadah ikon di header bawaan Payload hanya 18px; diperbesar agar lambang tidak terpotong
+.step-nav__home,
+.step-nav__home > span {
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+// --- Tombol utama ------------------------------------------------------------
+// Pakai warna tetap (bukan skala tema) supaya kontras teks terjaga di mode terang & gelap
+.btn--style-primary {
+  border-radius: 999px;
+  background-color: var(--ponpes-green-700);
+  border-color: var(--ponpes-green-700);
+  color: #fff;
+  font-weight: 700;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--ponpes-green-800);
+    border-color: var(--ponpes-green-800);
+    color: #fff;
+  }
+}
+
+.btn--style-secondary {
+  border-radius: 999px;
+}
+
+html[data-theme='dark'] .btn--style-primary {
+  background-color: var(--ponpes-gold-400);
+  border-color: var(--ponpes-gold-400);
+  color: var(--ponpes-green-950);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--ponpes-gold-300);
+    border-color: var(--ponpes-gold-300);
+    color: var(--ponpes-green-950);
+  }
+}
+
+// --- Kartu koleksi bawaan di bawah dashboard ("akses cepat") ----------------
+.dashboard__group-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.card {
+  border-radius: 18px;
+  border: 0;
+  background: var(--theme-elevation-0);
+  box-shadow: 0 1px 2px rgb(16 24 19 / 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -16px rgb(16 59 38 / 0.35);
+  }
+}
+
+// --- Halaman login ------------------------------------------------------------
+.template-minimal {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgb(201 162 39 / 0.12), transparent 60%),
+    radial-gradient(900px 500px at 110% 110%, rgb(25 101 61 / 0.14), transparent 60%),
+    var(--ponpes-page);
+}
+
+.template-minimal__wrap {
+  background: var(--theme-elevation-0);
+  border-radius: 28px;
+  padding: calc(var(--base) * 2);
+  box-shadow: 0 24px 48px -24px rgb(8 35 22 / 0.25);
+}
+
+.ponpes-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+
+  &__title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--theme-text);
+  }
+
+  &__subtitle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ponpes-gold-500);
+  }
+}
+
+// =============================================================================
+// Dashboard bento (src/components/admin/DashboardBento.tsx)
+// =============================================================================
+
+.ponpes-bento {
+  margin: var(--ponpes-gap) 0 calc(var(--base) * 2);
+
+  h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  // Judul halaman + tombol aksi
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: calc(var(--base) * 1.1);
+  }
+
+  &__bismillah {
+    margin: 0 0 4px;
+    font-family: var(--font-arabic);
+    font-size: 1.15rem;
+    color: var(--ponpes-gold-500);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  &__subtitle {
+    margin: 8px 0 0;
+    color: var(--theme-elevation-450);
+  }
+
+  &__header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ponpes-green-800);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--ponpes-green-800);
+    background: transparent;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+      background: var(--theme-success-50);
+      transform: translateY(-1px);
+    }
+
+    &--primary {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--ponpes-green-700), var(--ponpes-green-900));
+      box-shadow: 0 10px 20px -12px rgb(16 59 38 / 0.7);
+
+      &:hover {
+        color: #fff;
+        background: linear-gradient(135deg, var(--ponpes-green-800), var(--ponpes-green-950));
+      }
+    }
+
+    &--block {
+      width: 100%;
+    }
+  }
+
+  // Grid 12 kolom
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--ponpes-gap);
+  }
+
+  &__cell {
+    min-width: 0;
+    display: flex;
+
+    > * {
+      flex: 1;
+    }
+
+    &--stat { grid-column: span 3; }
+    &--chart { grid-column: span 6; }
+    &--psb { grid-column: span 3; }
+    &--news { grid-column: span 3; }
+    &--news-wide { grid-column: span 12; }
+    &--recent { grid-column: span 5; }
+    &--gauge { grid-column: span 4; }
+    &--countdown { grid-column: span 3; }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 22px;
+    border-radius: var(--ponpes-card-radius);
+    background: var(--theme-elevation-0);
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgb(16 24 19 / 0.04);
+  }
+
+  &__card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__muted {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--theme-elevation-450);
+  }
+
+  &__pill {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ponpes-green-800);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--ponpes-green-800);
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: var(--theme-success-50);
+    }
+  }
+
+  &__empty {
+    margin: auto 0;
+    padding: 12px 0;
+    font-size: 0.85rem;
+    color: var(--theme-elevation-450);
+  }
+
+  // Kartu statistik
+  &__stat {
+    min-height: 168px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -18px rgb(16 59 38 / 0.45);
+    }
+  }
+
+  &__stat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--theme-elevation-700);
+    color: var(--theme-elevation-800);
+  }
+
+  &__stat-value {
+    margin-top: 14px;
+    font-size: 3.1rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  &__stat-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 14px;
+    font-size: 0.78rem;
+    color: var(--theme-success-550);
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 6px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  &__attention {
+    color: var(--theme-warning-600);
+    font-weight: 700;
+  }
+
+  // Kartu statistik utama (hijau)
+  &__stat--hero {
+    color: #fff;
+    background-color: var(--ponpes-green-800);
+    background-image:
+      radial-gradient(160px 120px at 0% 100%, rgb(225 187 76 / 0.22), transparent 70%),
+      linear-gradient(135deg, var(--ponpes-green-700), var(--ponpes-green-950));
+
+    .ponpes-bento__arrow {
+      border-color: transparent;
+      background: #fff;
+      color: var(--ponpes-green-900);
+    }
+
+    .ponpes-bento__stat-note {
+      color: var(--ponpes-gold-300);
+    }
+  }
+
+  // Grafik batang 7 hari
+  &__chart {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+    align-items: end;
+    min-height: 190px;
+    padding-top: 26px;
+  }
+
+  &__bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+  }
+
+  &__bar-track {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+  }
+
+  &__bar {
+    width: min(100%, 56px);
+    border-radius: 999px;
+    transition: height 0.4s ease;
+
+    &--dark { background: var(--ponpes-green-900); }
+    &--mid { background: #23854f; }
+    &--light { background: #5fbf8a; }
+
+    &--empty {
+      background: repeating-linear-gradient(135deg, #9fb3a6 0 3px, transparent 3px 8px);
+      box-shadow: inset 0 0 0 1px rgb(159 179 166 / 0.4);
+    }
+  }
+
+  &__bar-tip {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ponpes-green-800);
+    background: var(--theme-success-50);
+    border: 1px solid var(--theme-success-200);
+  }
+
+  &__bar-label {
+    font-size: 0.75rem;
+    color: var(--theme-elevation-450);
+
+    &--today {
+      font-weight: 700;
+      color: var(--theme-text);
+    }
+  }
+
+  // Status PSB
+  &__psb {
+    p {
+      margin: 0;
+    }
+  }
+
+  &__psb-status {
+    margin: 16px 0 6px !important;
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--theme-success-600);
+
+    &--closed {
+      color: var(--theme-elevation-500);
+    }
+  }
+
+  &__psb .ponpes-bento__btn {
+    margin-top: auto;
+  }
+
+  &__psb .ponpes-bento__muted {
+    margin-bottom: 18px;
+  }
+
+  // Daftar (berita & pendaftar)
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    margin: 0 -8px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.12s ease;
+
+    &:hover {
+      background: var(--theme-elevation-50);
+    }
+  }
+
+  &__icon-badge,
+  &__avatar {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+  }
+
+  &__avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--ponpes-green-900);
+  }
+
+  &__row-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__row-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__row-meta {
+    font-size: 0.74rem;
+    color: var(--theme-elevation-450);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    b {
+      font-weight: 600;
+      color: var(--theme-elevation-700);
+    }
+  }
+
+  &__badge {
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    font-size: 0.68rem;
+    font-weight: 600;
+    white-space: nowrap;
+
+    &--new { color: var(--theme-warning-600); background: var(--theme-warning-50); }
+    &--verified { color: var(--theme-success-550); background: var(--theme-success-50); }
+    &--accepted { color: var(--ponpes-green-800); background: var(--theme-success-100); }
+    &--rejected { color: var(--theme-error-550); background: var(--theme-error-50); }
+  }
+
+  // Gauge progres seleksi
+  &__gauge {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    svg {
+      width: 100%;
+      max-width: 300px;
+      overflow: visible;
+    }
+  }
+
+  &__gauge-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -64px;
+
+    strong {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    span {
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: var(--theme-success-550);
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 16px;
+    margin: auto 0 0;
+    padding: 18px 0 0;
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--theme-elevation-550);
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    i {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+  }
+
+  &__legend-stripes {
+    background: repeating-linear-gradient(135deg, #9fb3a6 0 2px, transparent 2px 4px);
+    box-shadow: inset 0 0 0 1px #9fb3a6;
+  }
+
+  // Hitung mundur (kartu gelap bertekstur)
+  &__countdown {
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+    color: #fff;
+    background-color: var(--ponpes-green-950);
+    background-image:
+      repeating-radial-gradient(ellipse at 110% 130%, rgb(95 191 138 / 0.12) 0 2px, transparent 2px 16px),
+      radial-gradient(200px 160px at 100% 0%, rgb(225 187 76 / 0.2), transparent 70%),
+      linear-gradient(160deg, #04140c, var(--ponpes-green-900));
+
+    h2 {
+      color: #fff;
+    }
+
+    p {
+      margin: 6px 0 0;
+      font-size: 0.78rem;
+      color: rgb(216 243 225 / 0.7);
+    }
+
+    a {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ponpes-gold-300);
+      text-decoration: none;
+    }
+  }
+
+  &__countdown-time {
+    margin-top: 18px;
+    font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+
+  &__countdown-days {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ponpes-gold-300);
+
+    small {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+  }
+
+  &__countdown-done {
+    margin-top: 18px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ponpes-gold-300);
+  }
+}
+
+// --- Mode gelap: warna hijau tua diganti yang lebih terang supaya tetap terbaca ---
+html[data-theme='dark'] .ponpes-bento {
+  .ponpes-bento__btn:not(.ponpes-bento__btn--primary),
+  .ponpes-bento__pill {
+    border-color: var(--ponpes-gold-400);
+    color: var(--ponpes-gold-300);
+
+    &:hover {
+      background: rgb(225 187 76 / 0.12);
+    }
+  }
+
+  .ponpes-bento__bar--dark { background: #8fd6ad; }
+  .ponpes-bento__bar--mid { background: #2f9e5f; }
+  .ponpes-bento__bar--light { background: #1f6b44; }
+
+  .ponpes-bento__bar-tip {
+    color: var(--ponpes-gold-300);
+    background: transparent;
+    border-color: var(--ponpes-gold-400);
+  }
+
+  .ponpes-bento__badge--accepted {
+    color: #8fd6ad;
+    background: transparent;
+  }
+}
+
+// --- Responsif -------------------------------------------------------------
+@media (max-width: 1280px) {
+  .ponpes-bento__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .ponpes-bento__cell {
+    &--stat { grid-column: span 3; }
+    &--chart { grid-column: span 6; }
+    &--psb { grid-column: span 3; }
+    &--news { grid-column: span 3; grid-row: auto; }
+    &--news-wide { grid-column: span 6; }
+    &--recent { grid-column: span 6; }
+    &--gauge { grid-column: span 3; }
+    &--countdown { grid-column: span 3; }
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__scroll {
+    margin: 0;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .ponpes-bento__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .ponpes-bento__cell {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+
+    &--stat { grid-column: span 1 !important; }
+  }
+
+  .ponpes-bento__stat {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .ponpes-bento__stat-head {
+    font-size: 0.85rem;
+  }
+
+  .ponpes-bento__arrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ponpes-bento__stat-value {
+    font-size: 2.2rem;
+  }
+
+  .ponpes-bento__header-actions,
+  .ponpes-bento__btn {
+    width: 100%;
+  }
+}

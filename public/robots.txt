@@ -1,6 +1,0 @@
-# MODE PREVIEW: website belum diindeks Google.
-# Saat siap production, ganti isi file ini dengan:
-#   User-agent: *
-#   Allow: /
-User-agent: *
-Disallow: /
