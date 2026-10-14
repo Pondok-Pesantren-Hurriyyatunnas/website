@@ -10,7 +10,7 @@ export function NewsCard({ post }: { post: News }) {
 
   return (
     <Link
-      href={`/berita/${post.slug}`}
+      href={`/old/berita/${post.slug}`}
       className="card-bento group flex flex-col p-3 transition hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgb(16_59_38/0.4)]"
     >
       {thumbnail ? (

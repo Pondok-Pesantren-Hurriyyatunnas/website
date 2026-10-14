@@ -1,10 +1,10 @@
+import type { Metadata } from 'next'
 import type { CSSProperties, ReactNode } from 'react'
 import Link from 'next/link'
 
-import { Countdown } from '@/components/Countdown'
-import { MotionLayer } from '@/components/geometri/MotionLayer'
 import { Rosette } from '@/components/geometri/Rosette'
-import { Logo } from '@/components/Logo'
+import { ArchPhoto } from '@/components/site/ArchPhoto'
+import { SectionHeading } from '@/components/site/SectionHeading'
 import { categoryLabels, formatDate, mediaUrl, whatsappUrl } from '@/lib/format'
 import {
   getAdmissions,
@@ -15,20 +15,11 @@ import {
   getSiteSettings,
 } from '@/lib/payload'
 
-// Mockup konsep "Geometri Cahaya — versi pesantren": terang, hangat, menampilkan santri,
-// ciri khas pesantren, dan informasi penting untuk wali santri. Belum dipakai di beranda asli.
-export const dynamic = 'force-dynamic'
+// Beranda (desain "Geometri Cahaya · versi pesantren"): terang, hangat, menampilkan santri,
+// ciri khas pesantren, dan informasi penting untuk wali santri.
+export const metadata: Metadata = { alternates: { canonical: '/' } }
 
 const delay = (seconds: number) => ({ '--delay': `${seconds}s` }) as CSSProperties
-
-const navItems = [
-  ['Profil', '/profil'],
-  ['Program', '/program'],
-  ['PSB', '/psb'],
-  ['Berita', '/berita'],
-  ['Galeri', '/galeri'],
-  ['Kontak', '/kontak'],
-]
 
 function Icon({ children }: { children: ReactNode }) {
   return (
@@ -47,53 +38,7 @@ function Icon({ children }: { children: ReactNode }) {
   )
 }
 
-/** Foto berbingkai lengkung mihrab; jika foto belum ada, tampil pola garis. */
-function ArchPhoto({
-  src,
-  alt,
-  className = '',
-}: {
-  src?: string
-  alt: string
-  className?: string
-}) {
-  return (
-    <div className={`relative overflow-hidden rounded-t-full bg-[#e3ddc9] ${className}`}>
-      {src ? (
-        <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" />
-      ) : (
-        <div className="stripes absolute inset-0" />
-      )}
-      <div className="pointer-events-none absolute inset-0 rounded-t-full ring-1 ring-black/5 ring-inset" />
-    </div>
-  )
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  action,
-}: {
-  eyebrow: string
-  title: string
-  action?: ReactNode
-}) {
-  return (
-    <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-      <div data-reveal>
-        <p className="text-xs font-semibold tracking-[0.35em] text-[#a6821c] uppercase">
-          {eyebrow}
-        </p>
-        <h2 className="mt-3 font-serif text-4xl leading-tight font-semibold text-[#0b2418] md:text-5xl">
-          {title}
-        </h2>
-      </div>
-      {action}
-    </div>
-  )
-}
-
-export default async function PesantrenConceptPage() {
+export default async function HomePage() {
   const [site, home, program, admissions, news, gallery] = await Promise.all([
     getSiteSettings(),
     getHomePage(),
@@ -153,71 +98,7 @@ export default async function PesantrenConceptPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#f6f2e7] text-[#0b2418]">
-      <MotionLayer />
-
-      {/* ===== Bilah info PSB ===== */}
-      <div className="bg-[#0b2418] text-[13px] text-[#f4efe1]/80">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-6 py-2.5 sm:px-10">
-          <div className="flex flex-wrap items-baseline gap-x-2">
-            <span className="font-semibold text-[#ecd27f]">PSB {admissions.academicYear}</span>
-            <span>{admissions.isOpen ? '· Pendaftaran dibuka' : '· Pendaftaran ditutup'}</span>
-            {admissions.isOpen && admissions.closesAt && (
-              <span className="flex items-baseline gap-1.5">
-                · ditutup dalam
-                <Countdown
-                  target={admissions.closesAt}
-                  className="font-semibold text-white tabular-nums"
-                  daysClassName="mr-1"
-                />
-              </span>
-            )}
-          </div>
-          {waUrl && (
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener"
-              className="hidden font-semibold text-[#ecd27f] hover:text-white sm:inline"
-            >
-              Tanya via WhatsApp →
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* ===== Navigasi ===== */}
-      <header className="sticky top-0 z-40 border-b border-[#0b2418]/8 bg-[#f6f2e7]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
-          <Link href="/" className="flex items-center gap-3">
-            <Logo className="h-11 w-11" logo={site.logo} />
-            <span className="leading-tight">
-              <span className="block font-serif text-xl font-semibold">Hurriyyatunnas</span>
-              <span className="block text-[10px] font-semibold tracking-[0.18em] whitespace-nowrap text-[#a6821c] uppercase sm:text-[11px] sm:tracking-[0.2em]">
-                Pondok Pesantren
-              </span>
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-7 text-sm font-medium text-[#0b2418]/70 lg:flex">
-            {navItems.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                className="link-line pb-0.5 transition hover:text-[#0b2418]"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-          <Link
-            href="/psb"
-            className="rounded-full bg-[#165133] px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-white transition hover:bg-[#0b2418]"
-          >
-            Daftar<span className="hidden sm:inline"> Sekarang</span>
-          </Link>
-        </div>
-      </header>
-
+    <>
       {/* ===== Hero: teks + foto santri berbingkai lengkung ===== */}
       <section className="relative overflow-hidden">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 pt-14 pb-20 sm:px-10 lg:grid-cols-12 lg:pt-20 lg:pb-28">
@@ -578,13 +459,6 @@ export default async function PesantrenConceptPage() {
           </div>
         </div>
       </section>
-
-      <footer className="border-t border-[#0b2418]/10 px-6 py-10 text-center text-xs tracking-[0.2em] text-[#0b2418]/45 uppercase">
-        Pratinjau konsep “Geometri Cahaya · versi pesantren” ·{' '}
-        <Link href="/pratinjau/geometri" className="link-line text-[#165133]">
-          Lihat konsep sebelumnya
-        </Link>
-      </footer>
-    </div>
+    </>
   )
 }

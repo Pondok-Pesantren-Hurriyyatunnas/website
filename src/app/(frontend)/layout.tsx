@@ -9,7 +9,7 @@ import { Logo } from '@/components/Logo'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { mediaUrl, whatsappUrl } from '@/lib/format'
 import { getSiteSettings } from '@/lib/payload'
-import { absoluteUrl, allowIndexing, siteUrl } from '@/lib/seo'
+import { absoluteUrl, siteUrl } from '@/lib/seo'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' })
@@ -26,7 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description: site.description ?? undefined,
     icons: { icon: '/favicon.svg' },
     openGraph: { siteName: site.name, type: 'website', locale: 'id_ID' },
-    robots: allowIndexing ? undefined : { index: false, follow: false },
+    // Desain lama (/old/...) disimpan untuk perbandingan saja: tidak untuk diindeks
+    robots: { index: false, follow: false },
   }
 }
 

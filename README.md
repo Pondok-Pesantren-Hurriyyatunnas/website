@@ -65,8 +65,10 @@ Setelah mengubah struktur data di `src/collections` atau `src/globals`, jalankan
 | `src/collections/` | Berita, Galeri, Media, Pendaftar PSB, Akun Admin |
 | `src/globals/` | Isi halaman: Beranda, Profil, Program, Info Pondok, Info PSB |
 | `src/access.ts` | Aturan hak akses per peran |
-| `src/app/(frontend)/` | Halaman website |
-| `src/app/(frontend)/psb/` | Halaman PSB dan formulir pendaftaran (validasi di `actions.ts`) |
+| `src/app/(site)/` | Halaman website (desain "Geometri Cahaya · versi pesantren") |
+| `src/components/site/` | Header, footer, bingkai foto lengkung, dan komponen desain website |
+| `src/components/psb/` | Formulir pendaftaran PSB (validasi di `actions.ts`), dipakai desain baru dan lama |
+| `src/app/(frontend)/old/` | Desain lama, disimpan untuk perbandingan di `/old`, `/old/profil`, dan seterusnya (tidak diindeks Google) |
 | `src/app/(payload)/` | Dashboard admin dan API (dibuat otomatis oleh Payload, jangan diedit) |
 | `src/seed/index.ts` | Konten awal untuk database baru |
 

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
-    alternates: { canonical: `/berita/${post.slug}` },
+    alternates: { canonical: `/old/berita/${post.slug}` },
     openGraph: {
       type: 'article',
       publishedTime: post.publishedAt,
@@ -46,7 +46,7 @@ export default async function NewsDetailPage({ params }: Props) {
     image: thumbnail ? [thumbnail] : undefined,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    mainEntityOfPage: absoluteUrl(`/berita/${post.slug}`),
+    mainEntityOfPage: absoluteUrl(`/old/berita/${post.slug}`),
     author: { '@type': 'Organization', name: site.name },
     publisher: { '@type': 'Organization', name: site.name },
   }
@@ -55,7 +55,7 @@ export default async function NewsDetailPage({ params }: Props) {
     <article className="mx-auto max-w-[74rem] px-3 pt-4 pb-16 sm:px-4">
       <div className="card-bento mx-auto max-w-3xl p-6 md:p-12">
         <JsonLd data={article} />
-        <Link href="/berita" className="text-sm font-semibold text-brand-700 hover:underline">
+        <Link href="/old/berita" className="text-sm font-semibold text-brand-700 hover:underline">
           ← Kembali ke berita
         </Link>
         <div className="mt-6 flex items-center gap-2 text-sm">

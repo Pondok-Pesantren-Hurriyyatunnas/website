@@ -4,7 +4,7 @@ import { Countdown } from '@/components/Countdown'
 import { PageHeader } from '@/components/PageHeader'
 import { formatDate, whatsappUrl } from '@/lib/format'
 import { getAdmissions, getSiteSettings } from '@/lib/payload'
-import { RegistrationForm } from './RegistrationForm'
+import { RegistrationForm } from '@/components/psb/RegistrationForm'
 
 export async function generateMetadata(): Promise<Metadata> {
   const admissions = await getAdmissions()

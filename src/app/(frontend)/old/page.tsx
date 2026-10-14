@@ -145,13 +145,13 @@ export default async function HomePage() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/psb"
+                href="/old/psb"
                 className="rounded-full bg-gold-400 px-7 py-3.5 font-bold text-brand-950 shadow-[0_12px_24px_-12px_rgb(225_187_76/0.8)] transition hover:-translate-y-0.5 hover:bg-gold-300"
               >
                 Daftar Santri Baru {admissions.academicYear}
               </Link>
               <Link
-                href="/profil"
+                href="/old/profil"
                 className="rounded-full border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:bg-white/15"
               >
                 Kenali Kami
@@ -171,7 +171,7 @@ export default async function HomePage() {
               </div>
             )}
             <Link
-              href="/psb"
+              href="/old/psb"
               className="group flex flex-col justify-between rounded-[28px] border border-white/15 bg-brand-950/55 p-6 text-white shadow-2xl backdrop-blur-md transition hover:bg-brand-950/65"
             >
               <div className="flex items-start justify-between gap-3">
@@ -314,7 +314,7 @@ export default async function HomePage() {
                   <span />
                 )}
                 <Link
-                  href="/profil"
+                  href="/old/profil"
                   className="rounded-full border-[1.5px] border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 transition hover:bg-brand-50"
                 >
                   Profil lengkap →
@@ -331,7 +331,7 @@ export default async function HomePage() {
                 title="Jenjang & Program"
                 action={
                   <Link
-                    href="/program"
+                    href="/old/program"
                     className="rounded-full border-[1.5px] border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 transition hover:bg-white"
                   >
                     Lihat semua program
@@ -342,7 +342,7 @@ export default async function HomePage() {
                 {program.levels.map((level, i) => (
                   <Link
                     key={level.id ?? i}
-                    href="/program"
+                    href="/old/program"
                     className="card-bento group flex flex-col p-6 transition hover:-translate-y-1"
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -372,7 +372,7 @@ export default async function HomePage() {
               title="Berita Terbaru"
               action={
                 <Link
-                  href="/berita"
+                  href="/old/berita"
                   className="rounded-full border-[1.5px] border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 transition hover:bg-white"
                 >
                   Semua berita
@@ -382,7 +382,7 @@ export default async function HomePage() {
             {featuredNews ? (
               <div className="grid gap-3.5 lg:grid-cols-12">
                 <Link
-                  href={`/berita/${featuredNews.slug}`}
+                  href={`/old/berita/${featuredNews.slug}`}
                   className="group relative min-h-96 overflow-hidden rounded-[32px] bg-brand-950 lg:col-span-7"
                 >
                   {mediaUrl(featuredNews.thumbnail, 'large') ? (
@@ -417,7 +417,7 @@ export default async function HomePage() {
                     otherNews.map((post) => (
                       <Link
                         key={post.id}
-                        href={`/berita/${post.slug}`}
+                        href={`/old/berita/${post.slug}`}
                         className="group flex items-center gap-4 rounded-2xl p-3 transition hover:bg-paper"
                       >
                         <div className="h-20 w-24 shrink-0 overflow-hidden rounded-2xl bg-brand-100">
@@ -466,7 +466,7 @@ export default async function HomePage() {
                 title="Suasana Pondok"
                 action={
                   <Link
-                    href="/galeri"
+                    href="/old/galeri"
                     className="rounded-full border-[1.5px] border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 transition hover:bg-white"
                   >
                     Lihat galeri
@@ -477,7 +477,7 @@ export default async function HomePage() {
                 {photos.map((photo, i) => (
                   <Link
                     key={photo.id}
-                    href="/galeri"
+                    href="/old/galeri"
                     className={`group relative overflow-hidden rounded-[28px] bg-brand-100 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}
                   >
                     <img
@@ -512,13 +512,13 @@ export default async function HomePage() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
-                    href="/psb"
+                    href="/old/psb"
                     className="rounded-full bg-gold-400 px-7 py-3.5 font-bold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gold-300"
                   >
                     {admissions.isOpen ? 'Daftar Sekarang' : 'Lihat Info PSB'}
                   </Link>
                   <Link
-                    href="/kontak"
+                    href="/old/kontak"
                     className="rounded-full border border-white/25 px-7 py-3.5 font-semibold transition hover:bg-white/10"
                   >
                     Hubungi Kami

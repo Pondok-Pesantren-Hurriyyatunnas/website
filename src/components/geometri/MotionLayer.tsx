@@ -1,15 +1,16 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-// Efek kecil di sisi browser untuk halaman bergaya "Geometri Cahaya":
+// Efek kecil di sisi browser untuk desain "Geometri Cahaya":
 // - ornamen sedikit mengikuti mouse (variabel CSS --mx / --my di <html>)
 // - elemen [data-reveal] muncul halus saat masuk ke layar
+// Dipasang di layout, jadi pencarian elemen diulang setiap kali halaman berganti.
 export function MotionLayer() {
-  useEffect(() => {
-    const root = document.documentElement
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const pathname = usePathname()
 
+  useEffect(() => {
     const reveal = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -21,8 +22,15 @@ export function MotionLayer() {
       },
       { rootMargin: '0px 0px -10% 0px' },
     )
-    document.querySelectorAll('[data-reveal]').forEach((element) => reveal.observe(element))
+    document
+      .querySelectorAll('[data-reveal]:not(.is-visible)')
+      .forEach((element) => reveal.observe(element))
+    return () => reveal.disconnect()
+  }, [pathname])
 
+  useEffect(() => {
+    const root = document.documentElement
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     let frame = 0
     const onPointer = (event: PointerEvent) => {
       if (reduceMotion || event.pointerType !== 'mouse') return
@@ -33,9 +41,7 @@ export function MotionLayer() {
       })
     }
     window.addEventListener('pointermove', onPointer, { passive: true })
-
     return () => {
-      reveal.disconnect()
       cancelAnimationFrame(frame)
       window.removeEventListener('pointermove', onPointer)
     }

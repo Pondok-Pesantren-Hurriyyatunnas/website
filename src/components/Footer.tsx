@@ -31,7 +31,7 @@ export function Footer({ site }: { site: SiteSetting }) {
               </p>
             )}
             <Link
-              href="/psb"
+              href="/old/psb"
               className="mt-6 inline-flex rounded-full bg-gold-400 px-5 py-2.5 text-sm font-bold text-brand-950 transition hover:bg-gold-300"
             >
               Daftar Santri Baru →
@@ -50,7 +50,7 @@ export function Footer({ site }: { site: SiteSetting }) {
                 </li>
               ))}
               <li>
-                <Link href="/psb" className="text-brand-100/80 transition hover:text-white">
+                <Link href="/old/psb" className="text-brand-100/80 transition hover:text-white">
                   PSB
                 </Link>
               </li>

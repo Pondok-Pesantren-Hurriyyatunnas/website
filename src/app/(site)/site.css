@@ -128,7 +128,8 @@
   background-repeat: no-repeat;
   transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.link-line:hover {
+.link-line:hover,
+.link-line[aria-current='page'] {
   background-size: 100% 1px;
 }
 

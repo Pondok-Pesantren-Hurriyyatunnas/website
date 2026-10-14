@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { PageHeader } from '@/components/PageHeader'
 import { formatDate, mediaUrl } from '@/lib/format'
 import { getGallery } from '@/lib/payload'
-import { GalleryLightbox, type GalleryPhoto } from './GalleryLightbox'
+import { GalleryLightbox, type GalleryPhoto } from '@/components/GalleryLightbox'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/galeri' },
