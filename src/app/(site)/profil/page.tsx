@@ -6,15 +6,17 @@ import { ArchPhoto } from '@/components/site/ArchPhoto'
 import { PageIntro } from '@/components/site/PageIntro'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { mediaUrl } from '@/lib/format'
-import { getGallery, getHomePage, getProfilePage, getSiteSettings } from '@/lib/payload'
+import {
+  getGallery,
+  getHomePage,
+  getPageTexts,
+  getProfilePage,
+  getSiteSettings,
+} from '@/lib/payload'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSiteSettings()
-  return {
-    title: 'Profil',
-    description: `Sejarah, visi misi, dan struktur pengurus ${site.name}.`,
-    alternates: { canonical: '/profil' },
-  }
+  const t = await getPageTexts('profil')
+  return { title: t.introTitle, description: t.introSubtitle, alternates: { canonical: '/profil' } }
 }
 
 export default async function ProfilePage() {
@@ -24,15 +26,12 @@ export default async function ProfilePage() {
     getHomePage(),
     getGallery(),
   ])
+  const t = await getPageTexts('profil')
   const historyPhoto = mediaUrl(home.heroImage, 'large') ?? mediaUrl(gallery[0]?.image, 'large')
 
   return (
     <>
-      <PageIntro
-        eyebrow="Tentang kami"
-        title="Profil Pondok"
-        subtitle={`Mengenal lebih dekat ${site.name}: perjalanan, cita-cita, dan orang-orang di baliknya.`}
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
 
       {/* Sejarah */}
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:px-10 md:py-32 lg:grid-cols-12">
@@ -40,7 +39,7 @@ export default async function ProfilePage() {
           <ArchPhoto src={historyPhoto} alt={site.name} className="mx-auto aspect-[4/5] max-w-md" />
         </div>
         <div className="lg:col-span-7">
-          <SectionHeading eyebrow="Sejarah singkat" title="Perjalanan pondok" />
+          <SectionHeading eyebrow={t.historyEyebrow} title={t.historyTitle} />
           {site.foundedYear && (
             <p data-reveal className="-mt-4 mb-8 flex items-baseline gap-3">
               <span className="font-serif text-6xl font-semibold text-[#1f7f4a]">
@@ -69,7 +68,7 @@ export default async function ProfilePage() {
             data-reveal
             className="text-xs font-semibold tracking-[0.35em] text-[#e1bb4c] uppercase"
           >
-            Visi
+            {t.visionEyebrow}
           </p>
           <p
             data-reveal
@@ -85,7 +84,7 @@ export default async function ProfilePage() {
         <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <SectionHeading eyebrow="Misi" title="Langkah kami" />
+              <SectionHeading eyebrow={t.missionEyebrow} title={t.missionTitle} />
             </div>
             <ol className="lg:col-span-8">
               {profile.missions.map((mission, i) => (
@@ -109,7 +108,7 @@ export default async function ProfilePage() {
       {profile.staff && profile.staff.length > 0 && (
         <section className="border-t border-[#0b2418]/10 bg-white/50">
           <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
-            <SectionHeading eyebrow="Pengurus" title="Struktur pengurus" />
+            <SectionHeading eyebrow={t.staffEyebrow} title={t.staffTitle} />
             <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
               {profile.staff.map((member, i) => (
                 <div key={member.id ?? i} data-reveal className="text-center">

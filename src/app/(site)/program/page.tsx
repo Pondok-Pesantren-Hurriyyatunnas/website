@@ -5,30 +5,33 @@ import { ArchPhoto } from '@/components/site/ArchPhoto'
 import { PageIntro } from '@/components/site/PageIntro'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { mediaUrl } from '@/lib/format'
-import { getGallery, getProgramPage } from '@/lib/payload'
+import { getGallery, getPageTexts, getProgramPage } from '@/lib/payload'
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/program' },
-  title: 'Program Pendidikan',
-  description: 'Jenjang pendidikan, kegiatan harian, dan ekstrakurikuler santri.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getPageTexts('program')
+  return {
+    title: t.introTitle,
+    description: t.introSubtitle,
+    alternates: { canonical: '/program' },
+  }
 }
 
 export default async function ProgramPage() {
-  const [program, gallery] = await Promise.all([getProgramPage(), getGallery()])
+  const [program, gallery, t] = await Promise.all([
+    getProgramPage(),
+    getGallery(),
+    getPageTexts('program'),
+  ])
   const photo = (i: number) =>
     gallery.length ? mediaUrl(gallery[i % gallery.length].image, 'large') : undefined
 
   return (
     <>
-      <PageIntro
-        eyebrow="Pendidikan"
-        title="Program Pendidikan"
-        subtitle="Jenjang pendidikan formal dan kepesantrenan, kegiatan harian santri, serta ekstrakurikuler."
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
 
       {program.levels && program.levels.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
-          <SectionHeading eyebrow="Jenjang & program" title="Pilihan pendidikan" />
+          <SectionHeading eyebrow={t.levelsEyebrow} title={t.levelsTitle} />
           <div className="grid gap-10 md:grid-cols-3">
             {program.levels.map((level, i) => (
               <div key={level.id ?? i} data-reveal>
@@ -57,10 +60,9 @@ export default async function ProgramPage() {
           </div>
           <div className="mx-auto grid max-w-7xl gap-14 px-6 py-24 sm:px-10 md:py-32 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <SectionHeading eyebrow="Kehidupan santri" title="Sehari di Pondok" dark />
+              <SectionHeading eyebrow={t.dailyEyebrow} title={t.dailyTitle} dark />
               <p data-reveal className="-mt-4 leading-relaxed text-[#f4efe1]/65">
-                Dari tahajud dan subuh berjamaah hingga belajar malam di asrama, setiap waktu santri
-                terisi dengan ibadah, mengaji, belajar, dan pembinaan akhlak.
+                {t.dailyText}
               </p>
             </div>
             <ol className="grid gap-1 lg:col-span-8 lg:grid-cols-2 lg:gap-x-10">
@@ -83,7 +85,7 @@ export default async function ProgramPage() {
 
       {program.extracurriculars && program.extracurriculars.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
-          <SectionHeading eyebrow="Pengembangan diri" title="Ekstrakurikuler" />
+          <SectionHeading eyebrow={t.extraEyebrow} title={t.extraTitle} />
           <div className="flex flex-wrap gap-3">
             {program.extracurriculars.map((activity, i) => (
               <span

@@ -2,18 +2,15 @@ import type { Metadata } from 'next'
 
 import { PageIntro } from '@/components/site/PageIntro'
 import { whatsappUrl } from '@/lib/format'
-import { getSiteSettings } from '@/lib/payload'
+import { getPageTexts, getSiteSettings } from '@/lib/payload'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSiteSettings()
-  return {
-    title: 'Kontak',
-    description: `Alamat, nomor telepon, WhatsApp, dan lokasi ${site.name}.`,
-    alternates: { canonical: '/kontak' },
-  }
+  const t = await getPageTexts('kontak')
+  return { title: t.introTitle, description: t.introSubtitle, alternates: { canonical: '/kontak' } }
 }
 
 export default async function ContactPage() {
+  const t = await getPageTexts('kontak')
   const site = await getSiteSettings()
   const mapsSrc = `https://maps.google.com/maps?q=${encodeURIComponent(site.mapsQuery || site.name)}&output=embed`
   const waUrl = whatsappUrl(
@@ -29,11 +26,7 @@ export default async function ContactPage() {
 
   return (
     <>
-      <PageIntro
-        eyebrow="Kontak"
-        title="Hubungi Kami"
-        subtitle="Silakan berkunjung ke pondok atau hubungi kami untuk informasi pendaftaran dan kegiatan santri."
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-10 md:py-28 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <dl>

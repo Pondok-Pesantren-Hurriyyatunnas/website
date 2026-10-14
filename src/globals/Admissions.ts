@@ -6,7 +6,11 @@ import { revalidateGlobal } from '../hooks/revalidate'
 export const Admissions: GlobalConfig = {
   slug: 'admissions',
   label: 'Info PSB',
-  admin: { group: 'PSB' },
+  admin: {
+    group: 'PSB',
+    description:
+      'Info penerimaan santri baru: status buka/tutup, tanggal penutupan (hitung mundur), jenjang di formulir, alur, syarat, jadwal, dan biaya. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.',
+  },
   access: {
     read: anyone,
     update: ({ req }) => hasRole(req, 'admin', 'editor', 'admissions'),

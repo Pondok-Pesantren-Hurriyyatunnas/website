@@ -16,6 +16,7 @@ import { Registrations } from './collections/Registrations'
 import { Users } from './collections/Users'
 import { Admissions } from './globals/Admissions'
 import { HomePage } from './globals/HomePage'
+import { PageTexts } from './globals/PageTexts'
 import { ProfilePage } from './globals/ProfilePage'
 import { ProgramPage } from './globals/ProgramPage'
 import { SiteSettings } from './globals/SiteSettings'
@@ -53,6 +54,39 @@ export default buildConfig({
       icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' }],
     },
     dateFormat: 'd MMMM yyyy, HH:mm',
+    // Pratinjau website di samping form edit; halaman yang dibuka mengikuti apa yang sedang diedit
+    livePreview: {
+      collections: ['news', 'gallery'],
+      globals: [
+        'home-page',
+        'profile-page',
+        'program-page',
+        'page-texts',
+        'site-settings',
+        'admissions',
+      ],
+      url: ({ collectionConfig, globalConfig, data }) => {
+        const pages: Record<string, string> = {
+          'home-page': '/',
+          'profile-page': '/profil',
+          'program-page': '/program',
+          'page-texts': '/',
+          'site-settings': '/kontak',
+          admissions: '/psb',
+          gallery: '/galeri',
+        }
+        if (collectionConfig?.slug === 'news') {
+          // Berita draft belum tampil di website, jadi pratinjau membuka daftar berita
+          return data?._status === 'published' && data?.slug ? `/berita/${data.slug}` : '/berita'
+        }
+        return pages[globalConfig?.slug ?? collectionConfig?.slug ?? ''] ?? '/'
+      },
+      breakpoints: [
+        { name: 'mobile', label: 'HP', width: 390, height: 844 },
+        { name: 'tablet', label: 'Tablet', width: 820, height: 1180 },
+        { name: 'desktop', label: 'Desktop', width: 1440, height: 900 },
+      ],
+    },
     // Tampilan dashboard bertema pondok (gaya ada di src/app/(payload)/custom.scss)
     components: {
       graphics: {
@@ -71,7 +105,7 @@ export default buildConfig({
     translations: adminTranslations,
   },
   collections: [News, Gallery, Media, Registrations, Users],
-  globals: [HomePage, ProfilePage, ProgramPage, SiteSettings, Admissions],
+  globals: [HomePage, ProfilePage, ProgramPage, PageTexts, SiteSettings, Admissions],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

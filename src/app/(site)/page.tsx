@@ -12,6 +12,7 @@ import {
   getGallery,
   getHomePage,
   getProgramPage,
+  getPageTexts,
   getPublishedNews,
   getSiteSettings,
 } from '@/lib/payload'
@@ -48,6 +49,7 @@ export default async function HomePage() {
     getPublishedNews(3),
     getGallery(),
   ])
+  const [t, tp] = await Promise.all([getPageTexts('home'), getPageTexts('program')])
 
   const photos = [
     ...gallery.map((photo) => ({ src: mediaUrl(photo.image, 'large'), alt: photo.title })),
@@ -82,21 +84,35 @@ export default async function HomePage() {
   )
   const firstFee = admissions.fees?.[0]
 
+  // Angka statistik: isian Beranda › Angka Statistik; jika kosong, dihitung otomatis
+  const stats =
+    home.stats && home.stats.length > 0
+      ? home.stats.map((stat) => ({ value: stat.value, label: stat.label }))
+      : [
+          site.foundedYear ? { value: site.foundedYear, label: 'Berdiri sejak' } : null,
+          program.levels?.length
+            ? { value: String(program.levels.length), label: 'Jenjang & program' }
+            : null,
+          program.extracurriculars?.length
+            ? { value: String(program.extracurriculars.length), label: 'Ekstrakurikuler' }
+            : null,
+        ].filter((stat): stat is { value: string; label: string } => stat !== null)
+
   const quickLinks = [
     {
-      title: 'Daftar Online',
+      title: t.quickRegister,
       text: admissions.isOpen ? `PSB ${admissions.academicYear} dibuka` : 'Lihat info pendaftaran',
       href: '/psb#formulir',
       icon: <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />,
     },
     {
-      title: 'Rincian Biaya',
+      title: t.quickFees,
       text: firstFee ? `${firstFee.item}: ${firstFee.amount}` : 'Biaya pendidikan & asrama',
       href: '/psb',
       icon: <path d="M2 7h20v10H2zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6M6 7v10M18 7v10" />,
     },
     {
-      title: 'Jadwal PSB',
+      title: t.quickSchedule,
       text: admissions.schedule?.[0]?.activity ?? 'Tahapan seleksi santri baru',
       href: '/psb',
       icon: (
@@ -107,7 +123,7 @@ export default async function HomePage() {
       ),
     },
     {
-      title: 'Lokasi & Kontak',
+      title: t.quickLocation,
       text: site.address?.split(',').slice(-2).join(',').trim() || 'Kunjungi pondok kami',
       href: '/kontak',
       icon: (
@@ -135,20 +151,20 @@ export default async function HomePage() {
               className="intro mt-6 text-xs font-semibold tracking-[0.35em] text-[#a6821c] uppercase"
               style={delay(0.15)}
             >
-              Pondok Pesantren
+              {t.heroEyebrow}
             </p>
             <h1 className="mt-5 font-serif leading-[0.92] font-semibold">
               <span
                 className="intro block text-[clamp(3.2rem,7vw,6.2rem)] tracking-[-0.01em]"
                 style={delay(0.25)}
               >
-                Hurriyyatunnas
+                {t.heroTitle}
               </span>
               <span
                 className="intro block text-[clamp(2.4rem,5vw,4.4rem)] text-[#1f7f4a] italic"
                 style={delay(0.4)}
               >
-                Bakti Awo
+                {t.heroTitleAccent}
               </span>
             </h1>
             <p
@@ -162,29 +178,21 @@ export default async function HomePage() {
                 href="/psb"
                 className="group inline-flex items-center gap-3 rounded-full bg-[#165133] py-3.5 pr-3.5 pl-7 font-semibold text-white shadow-[0_14px_30px_-14px_rgb(22_81_51/0.8)] transition hover:bg-[#0b2418]"
               >
-                Daftarkan Calon Santri
+                {t.heroButton}
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e1bb4c] text-[#0b2418] transition group-hover:translate-x-1">
                   →
                 </span>
               </Link>
               <Link href="/profil" className="link-line pb-0.5 font-semibold text-[#165133]">
-                Kenali pondok kami
+                {t.heroLink}
               </Link>
             </div>
-            {site.foundedYear && (
+            {stats.length > 0 && (
               <div
                 className="intro mt-12 flex flex-wrap gap-x-10 gap-y-4 border-t border-[#0b2418]/10 pt-8"
                 style={delay(0.85)}
               >
-                {[
-                  { value: site.foundedYear, label: 'Berdiri sejak' },
-                  ...(program.levels?.length
-                    ? [{ value: String(program.levels.length), label: 'Jenjang & program' }]
-                    : []),
-                  ...(program.extracurriculars?.length
-                    ? [{ value: String(program.extracurriculars.length), label: 'Ekstrakurikuler' }]
-                    : []),
-                ].map((stat) => (
+                {stats.map((stat) => (
                   <div key={stat.label}>
                     <div className="font-serif text-4xl font-semibold">{stat.value}</div>
                     <div className="mt-1 text-sm text-[#0b2418]/55">{stat.label}</div>
@@ -234,7 +242,7 @@ export default async function HomePage() {
       {home.features && home.features.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 pt-24 sm:px-10 md:pt-32">
           <SectionHeading
-            eyebrow="Ciri khas pesantren"
+            eyebrow={t.featuresEyebrow}
             title={home.featuresHeading || 'Pendidikan yang menyeluruh'}
           />
           <div className="grid gap-px overflow-hidden rounded-[28px] bg-[#0b2418]/10 md:grid-cols-2 lg:grid-cols-4">
@@ -262,8 +270,8 @@ export default async function HomePage() {
       {program.levels && program.levels.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
           <SectionHeading
-            eyebrow="Program pendidikan"
-            title="Jenjang yang tersedia"
+            eyebrow={t.levelsEyebrow}
+            title={t.levelsTitle}
             action={
               <Link
                 href="/program"
@@ -316,15 +324,12 @@ export default async function HomePage() {
           <div className="mx-auto grid max-w-7xl gap-14 px-6 py-24 sm:px-10 md:py-32 lg:grid-cols-12">
             <div className="lg:col-span-4" data-reveal>
               <p className="text-xs font-semibold tracking-[0.35em] text-[#e1bb4c] uppercase">
-                Kehidupan santri
+                {tp.dailyEyebrow}
               </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight font-semibold md:text-5xl">
-                Sehari di Pondok
+                {tp.dailyTitle}
               </h2>
-              <p className="mt-5 leading-relaxed text-[#f4efe1]/65">
-                Dari tahajud dan subuh berjamaah hingga belajar malam di asrama, setiap waktu santri
-                terisi dengan ibadah, mengaji, belajar, dan pembinaan akhlak.
-              </p>
+              <p className="mt-5 leading-relaxed text-[#f4efe1]/65">{tp.dailyText}</p>
             </div>
             <ol className="relative grid gap-1 lg:col-span-8 lg:grid-cols-2 lg:gap-x-10">
               {program.dailySchedule.map((item, i) => (
@@ -359,8 +364,16 @@ export default async function HomePage() {
             data-reveal
             className="text-xs font-semibold tracking-[0.35em] text-[#a6821c] uppercase"
           >
-            Sambutan pimpinan
+            {t.welcomeEyebrow}
           </p>
+          {home.welcomeHeading && (
+            <h2
+              data-reveal
+              className="mt-4 font-serif text-2xl font-semibold text-[#1f7f4a] md:text-3xl"
+            >
+              {home.welcomeHeading}
+            </h2>
+          )}
           <p
             data-reveal
             style={delay(0.1)}
@@ -371,7 +384,7 @@ export default async function HomePage() {
           {home.leaderName && (
             <p data-reveal style={delay(0.2)} className="mt-8 font-semibold">
               {home.leaderName}
-              <span className="block text-sm font-normal text-[#0b2418]/55">Pimpinan Pondok</span>
+              <span className="block text-sm font-normal text-[#0b2418]/55">{t.leaderRole}</span>
             </p>
           )}
         </div>
@@ -382,8 +395,8 @@ export default async function HomePage() {
         <section className="border-t border-[#0b2418]/10 bg-white/50">
           <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 md:py-32">
             <SectionHeading
-              eyebrow="Kabar pondok"
-              title="Berita terbaru"
+              eyebrow={t.newsEyebrow}
+              title={t.newsTitle}
               action={
                 <Link
                   href="/berita"
@@ -437,15 +450,13 @@ export default async function HomePage() {
             <Rosette className="h-auto w-full" />
           </div>
           <p className="text-xs font-semibold tracking-[0.35em] text-[#ecd27f] uppercase">
-            Penerimaan santri baru
+            {t.ctaEyebrow}
           </p>
           <h2 className="mx-auto mt-4 max-w-2xl font-serif text-4xl leading-tight font-semibold md:text-6xl">
-            Tahun Ajaran {admissions.academicYear}
+            {t.ctaTitle}
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-white/75">
-            {admissions.isOpen
-              ? 'Pendaftaran dibuka dan dapat dilakukan sepenuhnya secara online.'
-              : 'Pendaftaran belum dibuka. Pantau terus informasinya.'}
+            {admissions.isOpen ? t.ctaOpenText : t.ctaClosedText}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link

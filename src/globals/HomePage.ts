@@ -6,7 +6,11 @@ import { revalidateGlobal } from '../hooks/revalidate'
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
   label: 'Beranda',
-  admin: { group: 'Halaman Website' },
+  admin: {
+    group: 'Halaman Website',
+    description:
+      'Isi halaman Beranda: banner, angka statistik, keunggulan, dan sambutan pimpinan. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.',
+  },
   access: { read: anyone, update: canEditContent },
   hooks: { afterChange: [revalidateGlobal] },
   fields: [
@@ -22,7 +26,16 @@ export const HomePage: GlobalConfig = {
               type: 'textarea',
               admin: { description: 'Kosongkan untuk memakai tagline pondok.' },
             },
-            { name: 'heroImage', label: 'Foto Banner', type: 'upload', relationTo: 'media' },
+            {
+              name: 'heroImage',
+              label: 'Foto Banner',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description:
+                  'Foto pertama di slideshow beranda. Foto berikutnya diambil otomatis dari Galeri. Pakai foto tegak/persegi.',
+              },
+            },
           ],
         },
         {

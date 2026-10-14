@@ -6,7 +6,11 @@ import { revalidateGlobal } from '../hooks/revalidate'
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Info Pondok & Kontak',
-  admin: { group: 'Halaman Website' },
+  admin: {
+    group: 'Halaman Website',
+    description:
+      'Identitas, kontak, dan media sosial pondok. Tampil di header, footer, halaman Kontak, dan tombol WhatsApp. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.',
+  },
   access: { read: anyone, update: canEditContent },
   hooks: { afterChange: [revalidateGlobal] },
   fields: [

@@ -6,7 +6,11 @@ import { revalidateGlobal } from '../hooks/revalidate'
 export const ProfilePage: GlobalConfig = {
   slug: 'profile-page',
   label: 'Profil',
-  admin: { group: 'Halaman Website' },
+  admin: {
+    group: 'Halaman Website',
+    description:
+      'Isi halaman Profil: sejarah, visi, misi, dan struktur pengurus. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.',
+  },
   access: { read: anyone, update: canEditContent },
   hooks: { afterChange: [revalidateGlobal] },
   fields: [

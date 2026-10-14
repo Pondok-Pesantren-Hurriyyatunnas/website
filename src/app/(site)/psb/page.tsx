@@ -6,19 +6,19 @@ import { RegistrationForm } from '@/components/psb/RegistrationForm'
 import { PageIntro } from '@/components/site/PageIntro'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { formatDate, whatsappUrl } from '@/lib/format'
-import { getAdmissions, getSiteSettings } from '@/lib/payload'
+import { getAdmissions, getPageTexts, getSiteSettings } from '@/lib/payload'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const admissions = await getAdmissions()
-  return {
-    title: `Penerimaan Santri Baru ${admissions.academicYear}`,
-    description: `Info dan formulir pendaftaran santri baru tahun ajaran ${admissions.academicYear}: syarat, jadwal, biaya, dan daftar online.`,
-    alternates: { canonical: '/psb' },
-  }
+  const t = await getPageTexts('psb')
+  return { title: t.introTitle, description: t.introSubtitle, alternates: { canonical: '/psb' } }
 }
 
 export default async function AdmissionsPage() {
-  const [site, admissions] = await Promise.all([getSiteSettings(), getAdmissions()])
+  const [site, admissions, t] = await Promise.all([
+    getSiteSettings(),
+    getAdmissions(),
+    getPageTexts('psb'),
+  ])
   const waUrl = whatsappUrl(
     site.whatsapp,
     `Assalamu'alaikum, saya ingin bertanya tentang pendaftaran santri baru ${admissions.academicYear}.`,
@@ -27,11 +27,7 @@ export default async function AdmissionsPage() {
 
   return (
     <>
-      <PageIntro
-        eyebrow="PSB online"
-        title={`Penerimaan Santri Baru ${admissions.academicYear}`}
-        subtitle="Syarat, jadwal, biaya, dan formulir pendaftaran calon santri."
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
 
       {/* Status pendaftaran */}
       <section className="mx-auto grid max-w-7xl gap-4 px-6 pt-16 sm:px-10 lg:grid-cols-12">
@@ -102,7 +98,7 @@ export default async function AdmissionsPage() {
       {/* Alur pendaftaran */}
       {admissions.steps && admissions.steps.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 pt-24 sm:px-10 md:pt-32">
-          <SectionHeading eyebrow="Langkah demi langkah" title="Alur pendaftaran" />
+          <SectionHeading eyebrow={t.stepsEyebrow} title={t.stepsTitle} />
           <ol className="grid border-t border-[#0b2418]/10 sm:grid-cols-2 lg:grid-cols-5">
             {admissions.steps.map((step, i) => (
               <li
@@ -166,10 +162,9 @@ export default async function AdmissionsPage() {
         <section id="formulir" className="scroll-mt-28 border-t border-[#0b2418]/10 bg-white/50">
           <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 sm:px-10 md:py-32 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <SectionHeading eyebrow="Daftar online" title="Formulir pendaftaran" />
+              <SectionHeading eyebrow={t.formEyebrow} title={t.formTitle} />
               <p data-reveal className="-mt-4 leading-relaxed text-[#0b2418]/65">
-                Isi data calon santri dengan benar. Kolom bertanda * wajib diisi. Setelah terkirim,
-                Anda akan mendapat nomor pendaftaran dan panitia akan menghubungi lewat WhatsApp.
+                {t.formText}
               </p>
             </div>
             <div className="rounded-[28px] bg-white p-6 shadow-[0_24px_60px_-40px_rgb(11_36_24/0.5)] md:p-10 lg:col-span-8">

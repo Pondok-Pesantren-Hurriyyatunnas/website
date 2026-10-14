@@ -103,6 +103,7 @@ export interface Config {
     'home-page': HomePage;
     'profile-page': ProfilePage;
     'program-page': ProgramPage;
+    'page-texts': PageText;
     'site-settings': SiteSetting;
     admissions: Admission;
   };
@@ -110,6 +111,7 @@ export interface Config {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'profile-page': ProfilePageSelect<false> | ProfilePageSelect<true>;
     'program-page': ProgramPageSelect<false> | ProgramPageSelect<true>;
+    'page-texts': PageTextsSelect<false> | PageTextsSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
   };
@@ -241,6 +243,9 @@ export interface Media {
  */
 export interface Gallery {
   id: string;
+  /**
+   * Tampil sebagai keterangan foto di slideshow beranda dan galeri. Tulis kalimat singkat, mis. "Santri mengaji di masjid pondok".
+   */
   title: string;
   image: string | Media;
   date: string;
@@ -816,6 +821,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Isi halaman Beranda: banner, angka statistik, keunggulan, dan sambutan pimpinan. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page".
  */
@@ -825,6 +832,9 @@ export interface HomePage {
    * Kosongkan untuk memakai tagline pondok.
    */
   heroSubtitle?: string | null;
+  /**
+   * Foto pertama di slideshow beranda. Foto berikutnya diambil otomatis dari Galeri. Pakai foto tegak/persegi.
+   */
   heroImage?: (string | null) | Media;
   /**
    * Tampil di bawah banner, mis. "250+" Santri aktif. Kosongkan untuk memakai data otomatis (tahun berdiri, jumlah jenjang, ekstrakurikuler).
@@ -852,6 +862,8 @@ export interface HomePage {
   createdAt?: string | null;
 }
 /**
+ * Isi halaman Profil: sejarah, visi, misi, dan struktur pengurus. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "profile-page".
  */
@@ -891,6 +903,8 @@ export interface ProfilePage {
   createdAt?: string | null;
 }
 /**
+ * Isi halaman Program: jenjang pendidikan, kegiatan harian ("Sehari di Pondok", juga tampil di Beranda), dan ekstrakurikuler. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "program-page".
  */
@@ -924,6 +938,90 @@ export interface ProgramPage {
   createdAt?: string | null;
 }
 /**
+ * Judul, keterangan, dan teks tombol di setiap halaman. Kosongkan isian untuk memakai teks bawaan (terlihat samar di dalam kotak). Bisa memakai {nama} untuk nama pondok dan {tahun} untuk tahun ajaran PSB. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-texts".
+ */
+export interface PageText {
+  id: string;
+  home?: {
+    heroEyebrow?: string | null;
+    heroTitle?: string | null;
+    heroTitleAccent?: string | null;
+    heroButton?: string | null;
+    heroLink?: string | null;
+    quickRegister?: string | null;
+    quickFees?: string | null;
+    quickSchedule?: string | null;
+    quickLocation?: string | null;
+    featuresEyebrow?: string | null;
+    levelsEyebrow?: string | null;
+    levelsTitle?: string | null;
+    welcomeEyebrow?: string | null;
+    leaderRole?: string | null;
+    newsEyebrow?: string | null;
+    newsTitle?: string | null;
+    ctaEyebrow?: string | null;
+    ctaTitle?: string | null;
+    ctaOpenText?: string | null;
+    ctaClosedText?: string | null;
+  };
+  profil?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+    historyEyebrow?: string | null;
+    historyTitle?: string | null;
+    visionEyebrow?: string | null;
+    missionEyebrow?: string | null;
+    missionTitle?: string | null;
+    staffEyebrow?: string | null;
+    staffTitle?: string | null;
+  };
+  program?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+    levelsEyebrow?: string | null;
+    levelsTitle?: string | null;
+    dailyEyebrow?: string | null;
+    dailyTitle?: string | null;
+    dailyText?: string | null;
+    extraEyebrow?: string | null;
+    extraTitle?: string | null;
+  };
+  psb?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+    stepsEyebrow?: string | null;
+    stepsTitle?: string | null;
+    formEyebrow?: string | null;
+    formTitle?: string | null;
+    formText?: string | null;
+  };
+  berita?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+  };
+  galeri?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+  };
+  kontak?: {
+    introEyebrow?: string | null;
+    introTitle?: string | null;
+    introSubtitle?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Identitas, kontak, dan media sosial pondok. Tampil di header, footer, halaman Kontak, dan tombol WhatsApp. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
@@ -959,6 +1057,8 @@ export interface SiteSetting {
   createdAt?: string | null;
 }
 /**
+ * Info penerimaan santri baru: status buka/tutup, tanggal penutupan (hitung mundur), jenjang di formulir, alur, syarat, jadwal, dan biaya. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "admissions".
  */
@@ -1088,6 +1188,100 @@ export interface ProgramPageSelect<T extends boolean = true> {
     | {
         name?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-texts_select".
+ */
+export interface PageTextsSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        heroEyebrow?: T;
+        heroTitle?: T;
+        heroTitleAccent?: T;
+        heroButton?: T;
+        heroLink?: T;
+        quickRegister?: T;
+        quickFees?: T;
+        quickSchedule?: T;
+        quickLocation?: T;
+        featuresEyebrow?: T;
+        levelsEyebrow?: T;
+        levelsTitle?: T;
+        welcomeEyebrow?: T;
+        leaderRole?: T;
+        newsEyebrow?: T;
+        newsTitle?: T;
+        ctaEyebrow?: T;
+        ctaTitle?: T;
+        ctaOpenText?: T;
+        ctaClosedText?: T;
+      };
+  profil?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
+        historyEyebrow?: T;
+        historyTitle?: T;
+        visionEyebrow?: T;
+        missionEyebrow?: T;
+        missionTitle?: T;
+        staffEyebrow?: T;
+        staffTitle?: T;
+      };
+  program?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
+        levelsEyebrow?: T;
+        levelsTitle?: T;
+        dailyEyebrow?: T;
+        dailyTitle?: T;
+        dailyText?: T;
+        extraEyebrow?: T;
+        extraTitle?: T;
+      };
+  psb?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
+        stepsEyebrow?: T;
+        stepsTitle?: T;
+        formEyebrow?: T;
+        formTitle?: T;
+        formText?: T;
+      };
+  berita?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
+      };
+  galeri?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
+      };
+  kontak?:
+    | T
+    | {
+        introEyebrow?: T;
+        introTitle?: T;
+        introSubtitle?: T;
       };
   updatedAt?: T;
   createdAt?: T;

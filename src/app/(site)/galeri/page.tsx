@@ -3,15 +3,15 @@ import type { Metadata } from 'next'
 import { GalleryLightbox, type GalleryPhoto } from '@/components/GalleryLightbox'
 import { PageIntro } from '@/components/site/PageIntro'
 import { formatDate, mediaUrl } from '@/lib/format'
-import { getGallery } from '@/lib/payload'
+import { getGallery, getPageTexts } from '@/lib/payload'
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/galeri' },
-  title: 'Galeri',
-  description: 'Galeri foto kegiatan dan fasilitas pondok.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getPageTexts('galeri')
+  return { title: t.introTitle, description: t.introSubtitle, alternates: { canonical: '/galeri' } }
 }
 
 export default async function GalleryPage() {
+  const t = await getPageTexts('galeri')
   const gallery = await getGallery()
   const photos: GalleryPhoto[] = gallery.map((photo) => ({
     id: photo.id,
@@ -24,11 +24,7 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <PageIntro
-        eyebrow="Dokumentasi"
-        title="Galeri"
-        subtitle="Potret kegiatan santri dan suasana pondok. Klik foto untuk melihat lebih besar."
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 md:py-28">
         {photos.length > 0 ? (
           <GalleryLightbox photos={photos} />

@@ -6,6 +6,7 @@ import { MotionLayer } from '@/components/geometri/MotionLayer'
 import { JsonLd } from '@/components/JsonLd'
 import { Logo } from '@/components/Logo'
 import { SiteFooter } from '@/components/site/SiteFooter'
+import { LivePreviewListener } from '@/components/site/LivePreviewListener'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { mediaUrl, whatsappUrl } from '@/lib/format'
@@ -70,6 +71,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         suppressHydrationWarning
       >
         <MotionLayer />
+        <LivePreviewListener />
         <SiteHeader
           logo={<Logo className="h-11 w-11" logo={site.logo} />}
           academicYear={admissions.academicYear}

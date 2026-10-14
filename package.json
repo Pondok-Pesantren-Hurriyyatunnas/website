@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.90.2",
+    "@payloadcms/live-preview-react": "^3.90.2",
     "@payloadcms/next": "3.90.2",
     "@payloadcms/plugin-import-export": "3.90.2",
     "@payloadcms/richtext-lexical": "3.90.2",

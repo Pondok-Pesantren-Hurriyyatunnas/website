@@ -6,7 +6,11 @@ import { revalidateGlobal } from '../hooks/revalidate'
 export const ProgramPage: GlobalConfig = {
   slug: 'program-page',
   label: 'Program Pendidikan',
-  admin: { group: 'Halaman Website' },
+  admin: {
+    group: 'Halaman Website',
+    description:
+      'Isi halaman Program: jenjang pendidikan, kegiatan harian ("Sehari di Pondok", juga tampil di Beranda), dan ekstrakurikuler. Klik ikon mata di sebelah tombol Simpan untuk melihat hasilnya langsung di samping form.',
+  },
   access: { read: anyone, update: canEditContent },
   hooks: { afterChange: [revalidateGlobal] },
   fields: [

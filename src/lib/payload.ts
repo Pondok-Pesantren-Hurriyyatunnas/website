@@ -2,6 +2,8 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import { cache } from 'react'
 
+import { resolvePageTexts, type PageKey } from './page-texts'
+
 export const getPayloadClient = () => getPayload({ config })
 
 // `cache` mencegah query yang sama dijalankan berulang dalam satu render halaman
@@ -24,6 +26,27 @@ export const getProgramPage = cache(async () =>
 export const getAdmissions = cache(async () =>
   (await getPayloadClient()).findGlobal({ slug: 'admissions', depth: 0 }),
 )
+
+const getPageTextsGlobal = cache(async () =>
+  (await getPayloadClient()).findGlobal({ slug: 'page-texts', depth: 0 }),
+)
+
+/** Teks halaman dari dashboard (Teks Halaman), dengan nilai bawaan untuk isian kosong. */
+export const getPageTexts = async <P extends PageKey>(page: P) => {
+  const [stored, site, admissions] = await Promise.all([
+    getPageTextsGlobal(),
+    getSiteSettings(),
+    getAdmissions(),
+  ])
+  return resolvePageTexts(
+    page,
+    (stored as unknown as Record<string, Record<string, unknown> | undefined>)[page],
+    {
+      nama: site.name,
+      tahun: admissions.academicYear,
+    },
+  )
+}
 
 export const getPublishedNews = cache(async (limit = 100) => {
   const { docs } = await (

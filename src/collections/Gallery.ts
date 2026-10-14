@@ -23,7 +23,16 @@ export const Gallery: CollectionConfig = {
     afterDelete: [revalidateAfterDelete],
   },
   fields: [
-    { name: 'title', label: 'Judul Foto', type: 'text', required: true },
+    {
+      name: 'title',
+      label: 'Judul Foto',
+      type: 'text',
+      required: true,
+      admin: {
+        description:
+          'Tampil sebagai keterangan foto di slideshow beranda dan galeri. Tulis kalimat singkat, mis. "Santri mengaji di masjid pondok".',
+      },
+    },
     { name: 'image', label: 'Foto', type: 'upload', relationTo: 'media', required: true },
     {
       name: 'date',

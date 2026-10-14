@@ -3,13 +3,12 @@ import Link from 'next/link'
 
 import { PageIntro } from '@/components/site/PageIntro'
 import { categoryLabels, formatDate, getMedia, mediaUrl } from '@/lib/format'
-import { getPublishedNews } from '@/lib/payload'
+import { getPageTexts, getPublishedNews } from '@/lib/payload'
 import type { News } from '@/payload-types'
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/berita' },
-  title: 'Berita',
-  description: 'Berita dan kegiatan terbaru pondok pesantren.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getPageTexts('berita')
+  return { title: t.introTitle, description: t.introSubtitle, alternates: { canonical: '/berita' } }
 }
 
 function Meta({ post, light = false }: { post: News; light?: boolean }) {
@@ -23,15 +22,12 @@ function Meta({ post, light = false }: { post: News; light?: boolean }) {
 }
 
 export default async function NewsListPage() {
+  const t = await getPageTexts('berita')
   const [featured, ...posts] = await getPublishedNews()
 
   return (
     <>
-      <PageIntro
-        eyebrow="Kabar pondok"
-        title="Berita & Kegiatan"
-        subtitle="Kabar terbaru dari kehidupan santri, kegiatan, dan pengumuman pondok."
-      />
+      <PageIntro eyebrow={t.introEyebrow} title={t.introTitle} subtitle={t.introSubtitle} />
 
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 md:py-28">
         {featured ? (
