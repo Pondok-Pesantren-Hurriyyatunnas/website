@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { anyone, canEditContent } from '../access'
+import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidate'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -11,6 +12,11 @@ export const Media: CollectionConfig = {
     create: canEditContent,
     update: canEditContent,
     delete: canEditContent,
+  },
+  // Foto dipakai langsung di banyak halaman; perubahan/hapus harus membuang cache halaman
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   fields: [
     {

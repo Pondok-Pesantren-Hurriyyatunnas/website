@@ -6,7 +6,15 @@ import { Rosette } from '@/components/geometri/Rosette'
 import { ArchPhoto } from '@/components/site/ArchPhoto'
 import { HeroSlideshow, type HeroSlide } from '@/components/site/HeroSlideshow'
 import { SectionHeading } from '@/components/site/SectionHeading'
-import { categoryLabels, formatDate, getMedia, mediaUrl, whatsappUrl } from '@/lib/format'
+import {
+  categoryLabels,
+  focalPosition,
+  formatDate,
+  getMedia,
+  mediaUrl,
+  pickPhotos,
+  whatsappUrl,
+} from '@/lib/format'
 import {
   getAdmissions,
   getGallery,
@@ -51,12 +59,7 @@ export default async function HomePage() {
   ])
   const [t, tp] = await Promise.all([getPageTexts('home'), getPageTexts('program')])
 
-  const photos = [
-    ...gallery.map((photo) => ({ src: mediaUrl(photo.image, 'large'), alt: photo.title })),
-    ...(home.heroImage ? [{ src: mediaUrl(home.heroImage, 'large'), alt: site.name }] : []),
-  ].filter((photo) => photo.src)
-  const photo = (i: number) =>
-    photos.length ? photos[i % photos.length] : { src: undefined, alt: site.name }
+  const levelPhotos = pickPhotos(program.levels ?? [], gallery)
 
   // Slideshow hero: foto banner dari dashboard lebih dulu, lalu foto-foto galeri
   const heroSlides: HeroSlide[] = [
@@ -292,8 +295,7 @@ export default async function HomePage() {
                 className="group"
               >
                 <ArchPhoto
-                  src={mediaUrl(level.photo, 'large') ?? photo(i + 2).src}
-                  alt={level.name}
+                  {...levelPhotos[i]}
                   className="aspect-[4/5] transition duration-500 group-hover:-translate-y-1.5"
                 />
                 <div className="mt-6">
@@ -356,6 +358,7 @@ export default async function HomePage() {
           <ArchPhoto
             src={mediaUrl(home.leaderPhoto, 'card')}
             alt={home.leaderName ?? 'Pimpinan pondok'}
+            position={focalPosition(home.leaderPhoto)}
             className="mx-auto aspect-[4/5] max-w-sm"
           />
         </div>

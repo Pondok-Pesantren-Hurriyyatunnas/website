@@ -4,7 +4,7 @@ import { Rosette } from '@/components/geometri/Rosette'
 import { ArchPhoto } from '@/components/site/ArchPhoto'
 import { PageIntro } from '@/components/site/PageIntro'
 import { SectionHeading } from '@/components/site/SectionHeading'
-import { mediaUrl } from '@/lib/format'
+import { pickPhotos } from '@/lib/format'
 import { getGallery, getPageTexts, getProgramPage } from '@/lib/payload'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,8 +22,7 @@ export default async function ProgramPage() {
     getGallery(),
     getPageTexts('program'),
   ])
-  const photo = (i: number) =>
-    gallery.length ? mediaUrl(gallery[i % gallery.length].image, 'large') : undefined
+  const levelPhotos = pickPhotos(program.levels ?? [], gallery)
 
   return (
     <>
@@ -35,11 +34,7 @@ export default async function ProgramPage() {
           <div className="grid gap-10 md:grid-cols-3">
             {program.levels.map((level, i) => (
               <div key={level.id ?? i} data-reveal>
-                <ArchPhoto
-                  src={mediaUrl(level.photo, 'large') ?? photo(i)}
-                  alt={level.name}
-                  className="aspect-[4/5]"
-                />
+                <ArchPhoto {...levelPhotos[i]} className="aspect-[4/5]" />
                 <div className="mt-6">
                   {level.label && (
                     <span className="text-xs font-semibold tracking-[0.2em] text-[#a6821c] uppercase">

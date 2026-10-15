@@ -923,7 +923,7 @@ export interface ProgramPage {
         label?: string | null;
         description?: string | null;
         /**
-         * Tampil di Beranda & halaman Program (bingkai tegak). Kosongkan untuk memakai foto dari Galeri secara otomatis.
+         * Tampil di Beranda & halaman Program (bingkai tegak). Kosongkan untuk memakai foto Galeri yang belum dipakai jenjang lain. Atur titik fokus foto di menu Media supaya potongannya pas.
          */
         photo?: (string | null) | Media;
         id?: string | null;

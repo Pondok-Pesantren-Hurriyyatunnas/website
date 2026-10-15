@@ -5,7 +5,7 @@ import { RichText } from '@/components/RichText'
 import { ArchPhoto } from '@/components/site/ArchPhoto'
 import { PageIntro } from '@/components/site/PageIntro'
 import { SectionHeading } from '@/components/site/SectionHeading'
-import { mediaUrl } from '@/lib/format'
+import { focalPosition, getMedia, mediaAlt, mediaUrl } from '@/lib/format'
 import {
   getGallery,
   getHomePage,
@@ -27,10 +27,9 @@ export default async function ProfilePage() {
     getGallery(),
   ])
   const t = await getPageTexts('profil')
-  const historyPhoto =
-    mediaUrl(profile.historyPhoto, 'large') ??
-    mediaUrl(home.heroImage, 'large') ??
-    mediaUrl(gallery[0]?.image, 'large')
+  // Foto sejarah pilihan admin; jika kosong, Foto Banner Beranda, lalu foto Galeri pertama
+  const historyMedia =
+    getMedia(profile.historyPhoto) ?? getMedia(home.heroImage) ?? getMedia(gallery[0]?.image)
 
   return (
     <>
@@ -39,7 +38,12 @@ export default async function ProfilePage() {
       {/* Sejarah */}
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:px-10 md:py-32 lg:grid-cols-12">
         <div className="lg:col-span-5" data-reveal>
-          <ArchPhoto src={historyPhoto} alt={site.name} className="mx-auto aspect-[4/5] max-w-md" />
+          <ArchPhoto
+            src={mediaUrl(historyMedia, 'card')}
+            alt={mediaAlt(historyMedia, site.name)}
+            position={focalPosition(historyMedia)}
+            className="mx-auto aspect-[4/5] max-w-md"
+          />
         </div>
         <div className="lg:col-span-7">
           <SectionHeading eyebrow={t.historyEyebrow} title={t.historyTitle} />
@@ -118,6 +122,7 @@ export default async function ProfilePage() {
                   <ArchPhoto
                     src={mediaUrl(member.photo, 'card')}
                     alt={member.name}
+                    position={focalPosition(member.photo)}
                     className="mx-auto aspect-[3/4] w-full max-w-[220px]"
                   />
                   <div className="mt-5 font-serif text-2xl font-semibold">{member.name}</div>
